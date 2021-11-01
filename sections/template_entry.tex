@@ -1,0 +1,128 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../cv.tex
+
+% You have these options:
+
+% Define a section for CV
+% Usage: \cvsection{section-title}
+
+% Define a subsection for CV
+% Usage: \cvsubsection{subsection-title}
+
+% Define a paragraph for CV
+% Usage: \begin{cvparagraph}
+%        \end{cvparagraph}
+
+% Define an entry of cv information
+% Usage: \cventry{position}{title}{location}{date}{description}
+	% Define an environment for cvitems(for cventry)
+	
+	% Define a subentry of cv information
+	% Usage: \cvsubentry{position}{title}{date}{description}
+
+	% Define an environment for cvhonor
+	% Define a line of cv information(honor, award or something else)
+
+	% Usage: \cvhonor{position}{title}{location}{date}
+	% Define an environment for cvskill
+	% Define a line of cv information(skill)
+	% Usage: \cvskill{type}{skillset}
+	
+
+%-------------------------------------------------------------------------------
+%                Commands for elements of Cover Letter
+%-------------------------------------------------------------------------------
+% Define an environment for cvletter
+% Define a section for the cover letter
+% Usage: \lettersection{section-title}
+% Define a title of the cover letter
+% Usage: \makelettertitle
+% Define a closing of the cover letter
+% Usage: \makeletterclosing
+
+% Section title
+\cvsection{This is a Section Title inside a {\backslash}cvsection\{\}}
+
+% Section content
+
+\cvsubsection{This is a Subsection Title inside a {\backslash}cvsubsection\{\}}
+
+\begin{cvparagraph}
+
+This is a text inside a {\backslash}begin\{cvparagraph\}.
+
+As you can see, you could put multiple paragraphs inside.
+
+\end{cvparagraph}
+
+\begin{cventries}
+	% Usage: \cventry{position}{organization}{location}{date}{<description>}
+  \cventry
+    {position 1}
+    {organization}
+    {location}
+    {date}
+    {description}
+
+  \cvextendentry
+    {position 2}
+    {date}
+    {description}
+    
+  \cventry
+    {position 3}
+    {organization 2}
+    {location}
+    {date}
+    {
+      \begin{cvitems}
+        \item {Item 1.}
+        \item {Item 2.}
+      \end{cvitems}
+			\begin{cvsubentries}
+			 	\cvsubentry{Subitem}{date}
+			 	\cvsubentry{Subitem}{date}
+			\end{cvsubentries}
+      \begin{cvitems}
+        \vspace{5.0mm}
+        \item {Item 3.}
+      \end{cvitems}
+    }
+\end{cventries}
+
+%-------------------------------------------------------------------------------
+
+% Section title
+\cvsection{Skills}
+
+% Section content
+\begin{cvskills}
+
+  \cvskill
+    {Skill category} % Category
+    {The details of the skill} % Skills
+    
+\end{cvskills}
+
+%-------------------------------------------------------------------------------
+
+% Section title
+\cvsection{Honors}
+
+\cvsubsection{International}
+
+\begin{cvhonors}
+
+  \cvhonor
+    {Award} % Award
+    {Event} % Event
+    {Location} % Location
+    {Date} % Date(s)
+
+  \cvhonor
+    {Award} % Award
+    {Event} % Event
+    {Location} % Location
+    {Date} % Date(s)
+
+\end{cvhonors}

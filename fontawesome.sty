@@ -1,0 +1,138 @@
+%!TEX encoding = UTF-8 Unicode
+%% Based on posquit0 awesome-cv, also based on furl's latex-fontawesome project.
+
+%-------------------------------------------------------------------------------
+%                                    Setup                                     
+%-------------------------------------------------------------------------------
+
+% Identify this package.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{fontawesome}[2021/08/04 v5.15.4 Font Awesome Icons]
+
+% Requirements to use.
+\usepackage{fontspec}
+
+% Define shortcut to load the Font Awesome fonts.
+%\newfontfamily{\FAb}[Path=fonts/]{fa-brands-400}
+%\newfontfamily{\FAs}[Path=fonts/]{fa-solid-900}
+
+% Generic command to display an icon by its name.
+\newcommand*{\fabicon}[1]{{\FAb\csname fabicon@#1\endcsname}}
+\newcommand*{\fasicon}[1]{{\FAs\csname fasicon@#1\endcsname}}
+
+%-------------------------------------------------------------------------------
+%                             Selecting the icons                          
+%-------------------------------------------------------------------------------
+% To find the symbol code you can search in:
+% https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free      
+
+%------------------------------------------------------------
+% Solid Symbols
+
+% mobile
+\expandafter\def\csname fasicon@mobile\endcsname {\symbol{"F10B}} \def\faMobile {{\FAs\csname fasicon@mobile\endcsname}}
+\expandafter\def\csname fasicon@mobile-alt\endcsname {\symbol{"F3CD}} \def\faMobileAlt {{\FAs\csname fasicon@mobile-alt\endcsname}}
+
+% email
+\expandafter\def\csname fasicon@envelope\endcsname {\symbol{"F0E0}} \def\faEnvelope {{\FAs\csname fasicon@envelope\endcsname}}
+
+% homepage
+\expandafter\def\csname fasicon@home\endcsname {\symbol{"F015}} \def\faHome {{\FAs\csname fasicon@home\endcsname}}
+\expandafter\def\csname fasicon@house-user\endcsname {\symbol{"E065}} \def\faHomeUser {{\FAs\csname fasicon@house-user\endcsname}}
+\expandafter\def\csname fasicon@map-marker-alt\endcsname {\symbol{"F3C5}} \def\faMapMarkerAlt {{\FAs\csname fasicon@map-marker-alt\endcsname}}
+
+% Blog
+\expandafter\def\csname fasicon@newspaper\endcsname {\symbol{"F1EA}} \def\faNewspaper {{\FAs\csname fasicon@newspaper\endcsname}}
+
+% Extra info
+\expandafter\def\csname fasicon@link\endcsname {\symbol{"F0C1}} \def\faLink {{\FAs\csname fasicon@link\endcsname}}
+\expandafter\def\csname fasicon@bookmark\endcsname {\symbol{"F02E}} \def\faBookmark {{\FAs\csname fasicon@bookmark\endcsname}}
+\expandafter\def\csname fasicon@info-circle\endcsname {\symbol{"F05A}} \def\faInfoCircle {{\FAs\csname fasicon@info-circle\endcsname}}
+
+% Google Scholar
+\expandafter\def\csname fasicon@graduation-cap\endcsname {\symbol{"F19D}} \def\faGraduationCap {{\FAs\csname fasicon@graduation-cap\endcsname}}
+\expandafter\def\csname fasicon@user-graduate\endcsname {\symbol{"F501}} \def\faUserGraduate {{\FAs\csname fasicon@user-graduate\endcsname}}
+
+%------------------------------------------------------------
+% Brands
+
+% Github
+\expandafter\def\csname fabicon@github-square\endcsname {\symbol{"F092}} \def\faGithubSquare {{\FAb\csname fabicon@github-square\endcsname}}
+\expandafter\def\csname fabicon@github-alt\endcsname {\symbol{"F113}} \def\faGithubAlt {{\FAb\csname fabicon@github-alt\endcsname}}
+\expandafter\def\csname fabicon@github\endcsname {\symbol{"F09B}} \def\faGithub {{\FAb\csname fabicon@github\endcsname}}
+
+% Gitlab
+\expandafter\def\csname fabicon@gitlab\endcsname {\symbol{"F296}} \def\faGitlab {{\FAb\csname fabicon@gitlab\endcsname}}
+
+% Stack-overflow
+\expandafter\def\csname fabicon@stack-overflow\endcsname {\symbol{"F16C}} \def\faStackOverflow {{\FAb\csname fabicon@stack-overflow\endcsname}}
+
+% Linkedin
+\expandafter\def\csname fabicon@linkedin\endcsname {\symbol{"F08C}} \def\faLinkedin {{\FAb\csname fabicon@linkedin\endcsname}}
+\expandafter\def\csname fabicon@linkedin-in\endcsname {\symbol{"F0E1}} \def\faLinkedinIn {{\FAb\csname fabicon@linkedin-in\endcsname}}
+
+% Xing
+\expandafter\def\csname fabicon@xing-square\endcsname {\symbol{"F169}} \def\faXingSquare {{\FAb\csname fabicon@xing-square\endcsname}}
+\expandafter\def\csname fabicon@xing\endcsname {\symbol{"F168}} \def\faXing {{\FAb\csname fabicon@xing\endcsname}}
+
+% Medium
+\expandafter\def\csname fabicon@medium-m\endcsname {\symbol{"F3C7}} \def\faMediumM {{\FAb\csname fabicon@medium-m\endcsname}}
+\expandafter\def\csname fabicon@medium\endcsname {\symbol{"F23A}} \def\faMedium {{\FAb\csname fabicon@medium\endcsname}}
+
+% Twitter
+\expandafter\def\csname fabicon@twitter\endcsname {\symbol{"F099}} \def\faTwitter {{\FAb\csname fabicon@twitter\endcsname}}
+\expandafter\def\csname fabicon@twitter-square\endcsname {\symbol{"F081}} \def\faTwitterSquare {{\FAb\csname fabicon@twitter-square\endcsname}}
+
+% Skype
+\expandafter\def\csname fabicon@skype\endcsname {\symbol{"F17E}} \def\faSkype {{\FAb\csname fabicon@skype\endcsname}}
+
+% Reddit
+\expandafter\def\csname fabicon@reddit\endcsname {\symbol{"F1A1}} \def\faReddit {{\FAb\csname fabicon@reddit\endcsname}}
+\expandafter\def\csname fabicon@reddit-square\endcsname {\symbol{"F1A2}} \def\faRedditSquare {{\FAb\csname fabicon@reddit-square\endcsname}}
+\expandafter\def\csname fabicon@reddit-alien\endcsname {\symbol{"F281}} \def\faRedditAlien {{\FAb\csname fabicon@reddit-alien\endcsname}}
+
+% Youtube
+\expandafter\def\csname fabicon@youtube\endcsname {\symbol{"F167}} \def\faYoutube {{\FAb\csname fabicon@youtube\endcsname}}
+\expandafter\def\csname fabicon@youtube-square\endcsname {\symbol{"F431}} \def\faYoutubeSquare {{\FAb\csname fabicon@youtube-square\endcsname}}
+
+% Instagram
+\expandafter\def\csname fabicon@instagram\endcsname {\symbol{"F16D}} \def\faInstagram {{\FAb\csname fabicon@instagram\endcsname}}
+\expandafter\def\csname fabicon@instagram-square\endcsname {\symbol{"E055}} \def\faInstagramSquare {{\FAb\csname fabicon@instagram-square\endcsname}}
+
+% TikTok
+\expandafter\def\csname fabicon@tiktok\endcsname {\symbol{"E07B}} \def\faTiktok {{\FAb\csname fabicon@tiktok\endcsname}}
+
+% Pinterest
+\expandafter\def\csname fabicon@pinterest\endcsname {\symbol{"F0D2}} \def\faPinterest {{\FAb\csname fabicon@pinterest\endcsname}}
+\expandafter\def\csname fabicon@pinterest-square\endcsname {\symbol{"F0D3}} \def\faPinterestSquare {{\FAb\csname fabicon@pinterest-square\endcsname}}
+\expandafter\def\csname fabicon@pinterest-p\endcsname {\symbol{"F231}} \def\faPinterestP {{\FAb\csname fabicon@pinterest-p\endcsname}}
+
+% Telegram
+\expandafter\def\csname fabicon@telegram\endcsname {\symbol{"F2C6}} \def\faTelegram {{\FAb\csname fabicon@telegram\endcsname}}
+\expandafter\def\csname fabicon@telegram-plane\endcsname {\symbol{"F3Fe}} \def\faTelegramPlane {{\FAb\csname fabicon@telegram-plane\endcsname}}
+
+% Facebook
+\expandafter\def\csname fabicon@facebook\endcsname {\symbol{"F09A}} \def\faFacebook {{\FAb\csname fabicon@facebook\endcsname}}
+\expandafter\def\csname fabicon@facebook-square\endcsname {\symbol{"F082}} \def\faFacebookSquare {{\FAb\csname fabicon@facebook-square\endcsname}}
+\expandafter\def\csname fabicon@facebook-f\endcsname {\symbol{"F39E}} \def\faFacebookF {{\FAb\csname fabicon@facebook-f\endcsname}}
+\expandafter\def\csname fabicon@facebook-messenger\endcsname {\symbol{"F39F}} \def\faFacebookMessenger {{\FAb\csname fabicon@facebook-messenger\endcsname}}
+
+% Snapchat
+\expandafter\def\csname fabicon@snapchat\endcsname {\symbol{"F2AB}} \def\faSnapchat {{\FAb\csname fabicon@snapchat\endcsname}}
+\expandafter\def\csname fabicon@snapchat-square\endcsname {\symbol{"F2AD}} \def\faSnapchatSquare {{\FAb\csname fabicon@snapchat-square\endcsname}}
+\expandafter\def\csname fabicon@snapchat-ghost\endcsname {\symbol{"F2AC}} \def\faSnapchatGhost {{\FAb\csname fabicon@snapchat-ghost\endcsname}}
+
+% Discord
+\expandafter\def\csname fabicon@discord\endcsname {\symbol{"F392}} \def\faDiscord {{\FAb\csname fabicon@discord\endcsname}}
+
+% Whatsapp
+\expandafter\def\csname fabicon@whatsapp\endcsname {\symbol{"F232}} \def\faWhatsapp {{\FAb\csname fabicon@whatsapp\endcsname}}
+\expandafter\def\csname fabicon@whatsapp-square\endcsname {\symbol{"F40C}} \def\faWhatsappSquare {{\FAb\csname fabicon@whatsapp-square\endcsname}}
+
+% Wordpress
+\expandafter\def\csname fabicon@wordpress\endcsname {\symbol{"F19A}} \def\faWordpress {{\FAb\csname fabicon@wordpress\endcsname}}
+\expandafter\def\csname fabicon@wordpress-simple\endcsname {\symbol{"F411}} \def\faWordpressSimple {{\FAb\csname fabicon@wordpress-simple\endcsname}}
+
+%-------------------------------------------------------------------------------
+
+\endinput
