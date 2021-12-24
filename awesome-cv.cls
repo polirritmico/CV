@@ -15,12 +15,12 @@
 % should not need to edit it.
 %
 % Class license:
-% LPPL v1.3c (http://www.latex-project.org/lppl)
+% LPPL v1.3c (https://www.latex-project.org/lppl)
 %
 %-------------------------------------------------------------------------------
 %
 % Adjusted by Eduardo Bray, <https://github.com/polirritmico>.
-% 2021/10/24 Santiago, Chile.
+% 2021/12/24 Santiago, Chile.
 % 
 % - Added header entries: Pinterest, Instagram, Discord, Tiktok, Youtube,
 %   Snapchat, Facebook, Telegram, Wordpress, Personal Blog, and extra info.
@@ -36,7 +36,7 @@
 %-------------------------------------------------------------------------------
 %                Identification
 %-------------------------------------------------------------------------------
-\ProvidesClass{awesome-cv}[2017/02/05 v1.6.1 Awesome Curriculum Vitae Class]
+\ProvidesClass{awesome-cv}[2021 v1.0 Curriculum Vitae]
 \NeedsTeXFormat{LaTeX2e}
 
 
@@ -307,55 +307,76 @@
 \newcommand*{\email}[1]{\def\@email{#1}}
 
 % Defines writer's homepage (optional)
-% Usage: \homepage{url}
-\newcommand*{\homepage}[1]{\def\@homepage{#1}}
+% Usage: \homepage{tag}{url}
+\newcommand*{\homepage}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@homepageurl{#1}}{\def\@homepageurl{#2}}%
+  \def\@homepagetag{#1}%
+}
+
 
 %--------------------------------------------------------------
 % Tech 
 
 % Defines writer's github (optional)
-% Usage: \github{github-nick}
-\newcommand*{\github}[1]{\def\@github{#1}}
+% Usage: \github{github-nick}{url}
+\newcommand*{\github}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@githuburl{github.com/#1}}{\def\@githuburl{#2}}%
+  \def\@githubtag{#1}%
+}
 
 % Defines writer's gitlab (optional)
-% Usage: \gitlab{gitlab-nick}
-\newcommand*{\gitlab}[1]{\def\@gitlab{#1}}
+% Usage: \gitlab{gitlab-nick}{url}
+\newcommand*{\gitlab}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@gitlaburl{gitlab.com/#1}}{\def\@gitlaburl{#2}}%
+  \def\@gitlabtag{#1}%
+}
 
 % Defines writer's stackoverflow profile (optional)
 % Usage: \stackoverflow{so userid}{so username}
-%   e.g.https://stackoverflow.com/users/123456/sam-smith
-%       would be \stackoverflow{123456}{sam-smith}
-\newcommand*{\stackoverflow}[2]{\def\@stackoverflowid{#1}\def\@stackoverflowname{#2}}
+\newcommand*{\stackoverflow}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@stackoverflowurl{stackoverflow.com/users/#1}}{\def\@stackoverflowurl{#2}}%
+  \def\@stackoverflowtag{#1}%
+}
+
 
 %--------------------------------------------------------------
 % Work and investigation
 
 % Defines writer's linked-in (optional)
 % Usage: \linkedin{linked-in-nick}
-\newcommand*{\linkedin}[1]{\def\@linkedin{#1}}
+\newcommand*{\linkedin}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@linkedinurl{www.linkedin.com/in/#1}}{\def\@linkedinurl{#2}}%
+  \def\@linkedintag{#1}%
+}
 
 % Defines writer's xing (optional)
 % Usage: \xing{xing name}
-\newcommand*{\xing}[1]{\def\@xing{#1}}
+\newcommand*{\xing}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@xingurl{www.xing.com/profile/#1}}{\def\@xingurl{#2}}%
+  \def\@xingtag{#1}%
+}
 
 % Defines writer's google scholar profile (optional)
 % Usage: \googlescholar{googlescholar userid}{googlescholar username}
-% e.g.https://scholar.google.co.uk/citations?user=wpZDx1cAAAAJ
-% would be \googlescholar{wpZDx1cAAAAJ}{Name-to-display-next-icon}
-% If 'googlescholar-name' is not provided than it defaults to
-% '\firstname \lastname'
 \newcommand*{\googlescholar}[2]{%
-  \def\@googlescholarid{#1}%
   \ifthenelse{\equal{#2}{}}{%
-    \def\@googlescholarname{\@firstname~\@lastname}%
-  }{%
-    \def\@googlescholarname{#2}%
-  }%
+    \def\@googlescholarurl{#1}}{\def\@googlescholarurl{#2}}%
+  \def\@googlescholartag{#1}%
 }
 
 % Defines writer's medium profile (optional)
 % Usage: \medium{medium account}
-\newcommand*{\medium}[1]{\def\@medium{#1}}
+\newcommand*{\medium}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@mediumurl{medium.com/@#1}}{\def\@mediumurl{#2}}%
+  \def\@mediumtag{#1}%
+}
 
 
 %--------------------------------------------------------------
@@ -363,65 +384,95 @@
 
 % Defines writer's twitter (optional)
 % Usage: \twitter{twitter handle}
-\newcommand*{\twitter}[1]{\def\@twitter{#1}}
+\newcommand*{\twitter}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@twitterurl{twitter.com/#1}}{\def\@twitterurl{#2}}%
+  \def\@twittertag{#1}%
+}
 
 % Defines writer's Instagram (optional)
 % Usage: \instagram{instagram username}
-\newcommand*{\instagram}[1]{\def\@instagram{#1}}
+\newcommand*{\instagram}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@instagramurl{instagram.com/#1}}{\def\@instagramurl{#2}}%
+  \def\@instagramtag{#1}%
+}
 
 % Defines writer's skype (optional)
 % Usage: \skype{skype id}{skype account}
 \newcommand*{\skype}[2]{\def\@skypeid{#1}\def\@skypeuser{#2}}
 
 % Defines writer's pinterest (optional)
-% Usage: pinterest{pinterest id}
-\newcommand*{\pinterest}[1]{\def\@pinterest{#1}}
+% Usage: \pinterest{pinterest id}{}
+\newcommand*{\pinterest}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@pinteresturl{www.pinterest.com/#1}}{\def\@pinteresturl{#2}}%
+  \def\@pinteresttag{#1}%
+}
 
 % Defines writer's reddit (optional)
 % Usage: \reddit{reddit account}
-\newcommand*{\reddit}[1]{\def\@reddit{#1}}
+\newcommand*{\reddit}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@redditurl{www.reddit.com/user/#1}}{\def\@redditurl{#2}}%
+  \def\@reddittag{#1}%
+}
 
 % Defines writer's YouTube profile (optional)
-% Usage: \youtube{youtube url}{youtube name}
+% Usage: \youtube{youtube name}{youtube url}
 \newcommand*{\youtube}[2]{%
-  \ifthenelse{\equal{#1}{}}{%
-    \def\@youtubename{\@firstname~\@lastname}%
-  }{%
-    \def\@youtubename{#1}%
-  }%
-  \def\@youtubeurl{#2}%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@youtubeurl{youtube.com/channel/#1}}{\def\@youtubeurl{#2}}%
+  \def\@youtubetag{#1}%
 }
 
 % Defines writer's Discord (optional)
 % Usage: \discord{discord id}{discord username}
 \newcommand*{\discord}[2]{%
-  \ifthenelse{\equal{#1}{}}{%
-    \def\@discordurl{}%
-  }{%
-    \def\@discordurl{\href{https://discordapp.com/users/#1}}%
-  }%
-  \def\@discorduser{#2}%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@discordurl{}}{\def\@discordurl{\href{https://discordapp.com/users/#2}}}%
+  \def\@discorduser{#1}%
 }
 
 % Defines writer's TikTok (optional)
-% Usage: \tiktok{tiktok username}
-\newcommand*{\tiktok}[1]{\def\@tiktok{#1}}
+% Usage: \tiktok{tiktok username}{}
+\newcommand*{\tiktok}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@tiktokurl{www.tiktok.com/@#1}}{\def\@tiktokurl{#2}}%
+  \def\@tiktoktag{#1}%
+}
 
 % Defines writer's snapchat (optional)
-% Usage: \snapchat{snapchat id}
-\newcommand*{\snapchat}[1]{\def\@snapchat{#1}}
+% Usage: \snapchat{snapchat id}{}
+\newcommand*{\snapchat}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@snapchaturl{www.snapchat.com/add/#1}}{\def\@snapchaturl{#2}}%
+  \def\@snapchattag{#1}%
+}
 
 % Defines writer's facebook (optional)
 % Usage: \facebook{facebook url}{facebook name}
-\newcommand*{\facebook}[2]{\def\@facebookurl{#1}\def\@facebookname{#2}}
+\newcommand*{\facebook}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@facebookurl{www.facebook.com/#1}}{\def\@facebookurl{#2}}%
+  \def\@facebooktag{#1}%
+}
 
 % Defines writer's telegram (optional)
-% Usage: \telegram{telegram id}
-\newcommand*{\telegram}[1]{\def\@telegram{#1}}
+% Usage: \telegram{telegram id}{}
+\newcommand*{\telegram}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@telegramurl{t.me/#1}}{\def\@telegramurl{#2}}%
+  \def\@telegramtag{#1}%
+}
 
 % Defines writer's wordpress profile (optional)
 % Usage: \wordpress{wordpress account}
-\newcommand*{\wordpress}[1]{\def\@wordpress{#1}}
+\newcommand*{\wordpress}[2]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \def\@wordpressurl{#1.wordpress.com}}{\def\@wordpressurl{#2}}%
+  \def\@wordpresstag{#1}%
+}
 
 % Defines writer's blog (optional)
 % Usage: \blog{blog url}{blog name}
@@ -568,47 +619,47 @@
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \href{mailto:\@email}{\faEnvelope\acvHeaderIconSep\@email}%
         }%
-      \ifthenelse{\isundefined{\@homepage}}%
+      \ifthenelse{\isundefined{\@homepagetag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
+					\href{https://\@homepageurl}{\faHome\acvHeaderIconSep\@homepagetag}%
         }%
-      \ifthenelse{\isundefined{\@github}}%
+      \ifthenelse{\isundefined{\@githubtag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://github.com/\@github}{\faGithub\acvHeaderIconSep\@github}%
+          \href{https://\@githuburl}{\faGithub\acvHeaderIconSep\@githubtag}%
         }%
-      \ifthenelse{\isundefined{\@gitlab}}%
+      \ifthenelse{\isundefined{\@gitlabtag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://gitlab.com/\@gitlab}{\faGitlab\acvHeaderIconSep\@gitlab}%
+          \href{https://\@gitlaburl}{\faGitlab\acvHeaderIconSep\@gitlabtag}%
         }%
-      \ifthenelse{\isundefined{\@stackoverflowid}}%
+      \ifthenelse{\isundefined{\@stackoverflowtag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\@stackoverflowname}%
+          \href{https://\@stackoverflowurl}{\faStackOverflow\acvHeaderIconSep\@stackoverflowtag}%
         }%
-      \ifthenelse{\isundefined{\@linkedin}}%
+      \ifthenelse{\isundefined{\@linkedintag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedin\acvHeaderIconSep\@linkedin}%
+          \href{https://\@linkedinurl}{\faLinkedin\acvHeaderIconSep\@linkedintag}%
         }%
-      \ifthenelse{\isundefined{\@xing}}%
+      \ifthenelse{\isundefined{\@xingtag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}%
+          \href{https://\@xingurl}{\faXingSquare\acvHeaderIconSep\@xingtag}%
         }%
-      \ifthenelse{\isundefined{\@medium}}%
+      \ifthenelse{\isundefined{\@mediumtag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://medium.com/@\@medium}{\faMedium\acvHeaderIconSep\@medium}%
+          \href{https://\@mediumurl}{\faMedium\acvHeaderIconSep\@mediumtag}%
         }%
       \ifthenelse{\isundefined{\@googlescholarid}}%
         {}%
@@ -616,23 +667,23 @@
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \href{https://scholar.google.com/citations?user=\@googlescholarid}{\faGraduationCap\acvHeaderIconSep\@googlescholarname}%
         }%
-      \ifthenelse{\isundefined{\@pinterest}}%
+      \ifthenelse{\isundefined{\@pinteresttag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.pinterest.com/\@pinterest}{\faPinterest\acvHeaderIconSep\@pinterest}%
+          \href{https://\@pinteresturl}{\faPinterest\acvHeaderIconSep\@pinteresttag}%
         }%
-      \ifthenelse{\isundefined{\@twitter}}%
+      \ifthenelse{\isundefined{\@twittertag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\@twitter}%
+          \href{https://\@twitterurl}{\faTwitter\acvHeaderIconSep\@twittertag}%
         }%
-      \ifthenelse{\isundefined{\@instagram}}%
+      \ifthenelse{\isundefined{\@instagramtag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://instagram.com/\@instagram}{\faInstagram\acvHeaderIconSep\@instagram}%
+          \href{https://\@instagramurl}{\faInstagram\acvHeaderIconSep\@instagramtag}%
         }%
       \ifthenelse{\isundefined{\@skypeid}}%
         {}%
@@ -640,17 +691,17 @@
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \href{live:\@skypeid}{\faSkype\acvHeaderIconSep\@skypeuser}%
         }%
-      \ifthenelse{\isundefined{\@reddit}}%
+      \ifthenelse{\isundefined{\@reddittag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\@reddit}%
+          \href{https://\@redditurl}{\faReddit\acvHeaderIconSep\@reddittag}%
         }%
-      \ifthenelse{\isundefined{\@youtubename}}%
+      \ifthenelse{\isundefined{\@youtubetag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-					\href{https://youtube.com/channel/\@youtubeurl}{\faYoutube\acvHeaderIconSep\@youtubename}%
+					\href{https://\@youtubeurl}{\faYoutube\acvHeaderIconSep\@youtubetag}%
         }%
 			\ifthenelse{\isundefined{\@discorduser}}%
         {}%
@@ -658,41 +709,41 @@
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \@discordurl{\faDiscord\acvHeaderIconSep\@discorduser}%
         }%
-			\ifthenelse{\isundefined{\@tiktok}}%
+			\ifthenelse{\isundefined{\@tiktoktag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.tiktok.com/@\@tiktok}{\faTiktok\acvHeaderIconSep\@tiktok}%
+          \href{https://\@tiktokurl}{\faTiktok\acvHeaderIconSep\@tiktoktag}%
         }%
-			\ifthenelse{\isundefined{\@snapchat}}%
+			\ifthenelse{\isundefined{\@snapchattag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{http://www.snapchat.com/add/\@snapchat}{\faSnapchat\acvHeaderIconSep\@snapchat}%
+          \href{https://\@snapchaturl}{\faSnapchat\acvHeaderIconSep\@snapchattag}%
         }%
-			\ifthenelse{\isundefined{\@facebookname}}%
+			\ifthenelse{\isundefined{\@facebooktag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.facebook.com/\@facebookurl}{\faFacebook\acvHeaderIconSep\@facebookname}%
+          \href{https://\@facebookurl}{\faFacebook\acvHeaderIconSep\@facebooktag}%
         }%
-			\ifthenelse{\isundefined{\@telegram}}%
+			\ifthenelse{\isundefined{\@telegramtag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://t.me/\@telegram}{\faTelegram\acvHeaderIconSep\@telegram}%
+          \href{https://\@telegramurl}{\faTelegram\acvHeaderIconSep\@telegramtag}%
         }%
-			\ifthenelse{\isundefined{\@wordpress}}%
+			\ifthenelse{\isundefined{\@wordpresstag}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://\@wordpress.wordpress.com}{\faWordpressSimple\acvHeaderIconSep\@wordpress}%
+          \href{https://\@wordpressurl}{\faWordpressSimple\acvHeaderIconSep\@wordpresstag}%
         }%
       \ifthenelse{\isundefined{\@blogname}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{http://\@blogurl}{\faNewspaper\acvHeaderIconSep\@blogname}%
+          \href{https://\@blogurl}{\faNewspaper\acvHeaderIconSep\@blogname}%
         }%
       \ifthenelse{\isundefined{\@extrainfo}}%
         {}%
