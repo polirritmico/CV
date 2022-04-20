@@ -30,6 +30,10 @@
 %   position with a organization.
 % - Updated Awesome font to v5.15.4. Now splited in brand, solid and
 %   regular fonts (regular not used).
+% - Header behaviour adjusted. Now each entry has two brackets. The first one
+%   is for the account name or the text showed on the page, and the second one
+%   is for the link. If the second bracket is empty the URL is made from the 
+%   profile name and the server URL.
 % 
 
 
