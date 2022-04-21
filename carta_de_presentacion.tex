@@ -49,10 +49,11 @@
 %-------------------------------------------------------------------------------
 
 % Photo options: [circle|rectangle,edge/noedge,left/right]
-\photo[rectangle,noedge,left]{images/profile.png} 
+%\photo[circle,edge,left]{images/profile.png} 
 
 % Personal information:
 \name{Eduardo}{Bray G.}
+\fullname{Eduardo Javier Bray Gutiérrez}
 %\familyname{familyname}% Optional
 \position{
   Programador{\possep}
@@ -104,18 +105,18 @@
 
 % The company being applied to
 \recipient
-  {Company Recruitment Team}
-  {Google Inc.\\1600 Amphitheatre Parkway\\Mountain View, CA 94043}
+  {Equipo de recursos humanos}
+  {Nombre compañía.\\Dirección\\Localidad, CP}
 % The date on the letter, default is the date of compilation
 \letterdate{\today}
 % The title of the letter
-\lettertitle{Job Application for Software Engineer}
+\lettertitle{Solicitud de empleo para CARGO}
 % How the letter is opened
-\letteropening{Dear Mr./Ms./Dr. LastName,}
+\letteropening{Estimado Sr. Apellido,}
 % How the letter is closed
-\letterclosing{Sincerely,}
+\letterclosing{Atentamente,}
 % Any enclosures with the letter
-\letterenclosure[Attached]{Curriculum Vitae}
+\letterenclosure[Adjunto]{Curriculum Vitae}
 
 
 %-------------------------------------------------------------------------------
@@ -130,8 +131,8 @@
 % Print the footer with 3 arguments(<left>, <center>, <right>)
 % Leave any of these blank if they are not needed
 \makecvfooter
-  {\today}
-  {Claud D. Park~~~·~~~Cover Letter}
+  {}
+  {Eduardo Bray G.~~~·~~~Carta de presentación}
   {}
 
 % Print the title with above letter informations
@@ -144,14 +145,21 @@
 %-------------------------------------------------------------------------------
 \begin{cvletter}
 
+Párrafo de apertura: Declara la razón por la que escribes, cómo te enteraste del cargo o la organización. Añadir información básica sobre ti mismo.
+
+Segundo párrafo: Menciona por qué estás interesado por el empleo o escribe el trabajo que el empleador hace (decir simplemente que estás interesado no menciona las razones y puede parecer una carta-tipo). Demuestra que conoces suficiente del empleador o la posición para relacionar tus antecedentes con el empleador o la posición. Menciona habilidades específicas que te hacen encajar en las necesidades del empleador. (Enfócate lo que puedes hacer para el empleador, no en lo que el empleador puede hacer por ti.) Esta es una oportunidad para explicar con más detalle ítems relevantes de tu currículum. Refiérete al hecho que tu currículum está adjunto. Menciona otros adjuntos si son requeridos para la posición.
+
+Tercer párrafo: Indica que quieres la oportunidad de tener una entrevista por el puesto o que quieres conversar con el empleador para aprender más acerca de oportunidades o planes de contratación. Menciona lo que harás para hacer seguimiento, como llamar por teléfono al empleador en un par de semanas. Si vas a estar cerca de la ubicación del empleador podrías ofrecer una visita, indicar cuando. Indica que estarías encantado de proveer cualquier información adicional que se requiera. Agradece al empleador por su consideración.
+
+
 \lettersection{About Me}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis. Vivamus at neque arcu, sed tempor quam. Curabitur pharetra tincidunt tincidunt. Morbi volutpat feugiat mauris, quis tempor neque vehicula volutpat. Duis tristique justo vel massa fermentum accumsan. Mauris ante elit, feugiat vestibulum tempor eget, eleifend ac ipsum. Donec scelerisque lobortis ipsum eu vestibulum. Pellentesque vel massa at felis accumsan rhoncus.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis. Vivamus at neque arcu, sed tempor quam. Curabitur pharetra tincidunt tincidunt.
 
 \lettersection{Why Google?}
-Suspendisse commodo, massa eu congue tincidunt, elit mauris pellentesque orci, cursus tempor odio nisl euismod augue. Aliquam adipiscing nibh ut odio sodales et pulvinar tortor laoreet. Mauris a accumsan ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse vulputate sem vehicula ipsum varius nec tempus dui dapibus. Phasellus et est urna, ut auctor erat. Sed tincidunt odio id odio aliquam mattis. Donec sapien nulla, feugiat eget adipiscing sit amet, lacinia ut dolor. Phasellus tincidunt, leo a fringilla consectetur, felis diam aliquam urna, vitae aliquet lectus orci nec velit. Vivamus dapibus varius blandit.
+Suspendisse commodo, massa eu congue tincidunt, elit mauris pellentesque orci, cursus tempor odio nisl euismod augue. Aliquam adipiscing nibh ut odio sodales et pulvinar tortor laoreet. Mauris a accumsan ligula.
 
 \lettersection{Why Me?}
-Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et sagittis. Ut interdum, enim varius pellentesque tincidunt, magna libero sodales tortor, ut fermentum nunc metus a ante. Vivamus odio leo, tincidunt eu luctus ut, sollicitudin sit amet metus. Nunc sed orci lectus. Ut sodales magna sed velit volutpat sit amet pulvinar diam venenatis.
+Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et sagittis. Ut interdum, enim varius pellentesque tincidunt, magna libero sodales tortor, ut fermentum nunc metus a ante.
 
 \end{cvletter}
 
@@ -159,6 +167,6 @@ Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et sag
 %-------------------------------------------------------------------------------
 % Print the signature and enclosures with above letter informations
 %-------------------------------------------------------------------------------
-%\makeletterclosing
+\makeletterclosing
 
 \end{document}
