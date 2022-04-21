@@ -18,4 +18,4 @@ $ xelatex -synctex=1 -interaction=nonstopmode "curriculum".tex
 
 ---
 
-Diseño modificado desde https://github.com/posquit0/Awesome-CV.
+Diseño ajustado desde https://github.com/posquit0/Awesome-CV.
