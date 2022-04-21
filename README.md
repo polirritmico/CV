@@ -5,7 +5,7 @@ Mi CV en formato LaTeX para su rápido ajuste y compartición.
 
 ## PDF
 
-[![PDF preview](images/curriculum.png?raw=true "CV")](curriculum.pdf?raw?true "CV")
+[![PDF preview](images/curriculum.png?raw=true "CV")](curriculum.pdf?raw=true "CV")
 
 ## Compilación
 
