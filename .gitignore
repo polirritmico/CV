@@ -17,6 +17,8 @@
 ## Vim & Emacs temp files:
 .*sw[op]
 *~
+## TeXstudio session:
+*.txss2
 
 ### Mac OS X ###
 ## Mac OS X metadata files:
