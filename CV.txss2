@@ -22,12 +22,60 @@
         "FileVersion": 1,
         "Files": [
             {
-                "Col": 0,
+                "Col": 38,
                 "EditorGroup": 0,
                 "FileName": "curriculum.tex",
                 "FirstLine": 0,
                 "FoldedLines": "",
+                "Line": 12
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "sections/resumen.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 23
+            },
+            {
+                "Col": 46,
+                "EditorGroup": 0,
+                "FileName": "awesome-cv.cls",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 703
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "../../../../../usr/share/texmf-dist/tex/latex/fontspec/fontspec.sty",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 44
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "sections/estudios.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
                 "Line": 0
+            },
+            {
+                "Col": 61,
+                "EditorGroup": 0,
+                "FileName": "sections/habilidades.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 20
+            },
+            {
+                "Col": 5,
+                "EditorGroup": 0,
+                "FileName": "sections/experiencia.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 21
             }
         ],
         "MasterFile": ""
