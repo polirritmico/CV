@@ -1,24 +1,14 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
-% Awesome CV LaTeX Template for Cover Letter
-%
-% This template has been downloaded from:
-% https://github.com/posquit0/Awesome-CV
-%
-% Authors:
-% Claud D. Park <posquit0.bj@gmail.com>
-% Lars Richter <mail@ayeks.de>
-%
-% Template license:
-% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
-%
-
 
 %-------------------------------------------------------------------------------
 % CONFIGURATIONS
 %-------------------------------------------------------------------------------
-% A4 paper size by default, use 'letterpaper' for US letter
+% 'a4paper' size by default, use 'letterpaper' for US letter
 \documentclass[11pt, a4paper]{awesome-cv}
+
+% Español
+\usepackage[spanish]{babel}
 
 % Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
@@ -26,60 +16,75 @@
 % Specify the location of the included fonts
 \fontdir[fonts/]
 
+% If you would like to change the social information separator from a
+% pipe (|) to something else replace \textbar
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+%---------------------------------------
+
 % Color for highlights
-% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
-%                 awesome-nephritis, awesome-concrete, awesome-darknight
+% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red,
+%                 awesome-pink, awesome-orange, awesome-nephritis,
+%                 awesome-concrete, awesome-darknight
 \colorlet{awesome}{awesome-red}
 % Uncomment if you would like to specify your own color
-% \definecolor{awesome}{HTML}{CA63A8}
-
-% Colors for text
-% Uncomment if you would like to specify your own color
-% \definecolor{darktext}{HTML}{414141}
-% \definecolor{text}{HTML}{333333}
-% \definecolor{graytext}{HTML}{5D5D5D}
-% \definecolor{lighttext}{HTML}{999999}
+%\definecolor{awesome}{HTML}{CA63A8}
 
 % Set false if you don't want to highlight section with awesome color
 \setbool{acvSectionColorHighlight}{true}
 
-% If you would like to change the social information separator from a pipe (|) to something else
-\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
-
+% Colors for text
+% Uncomment if you would like to specify your own color
+%\definecolor{darktext}{HTML}{414141}
+%\definecolor{text}{HTML}{333333}
+%\definecolor{graytext}{HTML}{5D5D5D}
+%\definecolor{lighttext}{HTML}{999999}
 
 %-------------------------------------------------------------------------------
-%	PERSONAL INFORMATION
+%	                                HEADER SETUP
+%-------------------------------------------------------------------------------
 %	Comment any of the lines below if they are not required
+% Add \\ inside the {} if you need to break a line, e.g., xing{your name\\}
+% (The order of the entries is defined in awesome-cv.cls not here)
 %-------------------------------------------------------------------------------
-% Available options: circle|rectangle,edge/noedge,left/right
-\photo[circle,noedge,left]{./examples/profile}
-\name{Claud D.}{Park}
-\position{Software Architect{\enskip\cdotp\enskip}Security Expert}
-\address{42-8, Bangbae-ro 15-gil, Seocho-gu, Seoul, 00681, Rep. of KOREA}
 
-\mobile{(+82) 10-9030-1843}
-\email{posquit0.bj@gmail.com}
-\homepage{www.posquit0.com}
-\github{posquit0}
-\linkedin{posquit0}
-% \gitlab{gitlab-id}
-% \stackoverflow{SO-id}{SO-name}
-% \twitter{@twit}
-% \skype{skype-id}
-% \reddit{reddit-id}
-% \medium{madium-id}
-% \googlescholar{googlescholar-id}{name-to-display}
-%% \firstname and \lastname will be used
-% \googlescholar{googlescholar-id}{}
-% \extrainfo{extra informations}
+% Photo options: [circle|rectangle,edge/noedge,left/right]
+%\photo[]{profile.png} 
 
-\quote{``Be the change that you want to see in the world."}
+% Professional profile
+\linkedin{eduardo-bray}{}
+%\xing{profile}{}
+%\googlescholar{id}{name-to-display}{}
+%\googlescholar{googlescholar-id}{}% Will add first and last name
+%\medium{id}{}
 
+% Social Networks
+%\twitter{@polirritmico}{}
+%\instagram{username}{}
+%\skype{skype-id}{account}
+\pinterest{ebray187}{}
+%\reddit{username}{}
+\youtube{Youtube}{www.youtube.com/channel/UCWJ5DnWV2wTihLlw1fdxAxQ}
+%\discord{username}{fullnumber-id}
+%\tiktok{account}{}
+%\snapchat{username}{}
+%\facebook{username}{}
+%\telegram{telegram}{test}
+
+% Others:
+%\wordpress{username}{}
+%\blog{url}{blog name}
+%\extrainfo{extra information}{}
+%\extrainfo{extra information}{url}
+
+%\quote{``Here you can add a meaningful quote or paragraph."}
 
 %-------------------------------------------------------------------------------
-%	LETTER INFORMATION
+%                              LETTER INFORMATION
+%-------------------------------------------------------------------------------
 %	All of the below lines must be filled out
 %-------------------------------------------------------------------------------
+
 % The company being applied to
 \recipient
   {Company Recruitment Team}
@@ -97,9 +102,11 @@
 
 
 %-------------------------------------------------------------------------------
+%	                                  DOCUMENT
+%-------------------------------------------------------------------------------
 \begin{document}
 
-% Print the header with above personal informations
+% Add the HEADER with the defined personal information
 % Give optional argument to change alignment(C: center, L: left, R: right)
 \makecvheader[R]
 
@@ -115,6 +122,8 @@
 
 %-------------------------------------------------------------------------------
 %	LETTER CONTENT
+%	Each section is imported separately, open each file in turn to modify content
+% If needed add \newpage between sections or a \vspace{X.Xmm} (can be negative)
 %-------------------------------------------------------------------------------
 \begin{cvletter}
 
@@ -132,6 +141,7 @@ Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et sag
 
 %-------------------------------------------------------------------------------
 % Print the signature and enclosures with above letter informations
+%-------------------------------------------------------------------------------
 \makeletterclosing
 
 \end{document}
