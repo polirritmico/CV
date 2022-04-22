@@ -25,22 +25,25 @@
 % - Added header entries: Pinterest, Instagram, Discord, Tiktok, Youtube,
 %   Snapchat, Facebook, Telegram, Wordpress, Personal Blog, and extra info.
 % - Now the \cvsubentries \cvsubentry its functional but have some problems on
-%   some contexts. Can be fixed with \vspace{}
+%   some contexts. Can be fixed manually with \vspace{}
 % - The \cvextendentry extend the previous \cventry, e.g. with more than one
-%   position with a organization.
-% - Updated Awesome font to v5.15.4. Now splited in brand, solid and
-%   regular fonts (regular not used).
+%   position with an organization.
+% - Updated Awesome font to v5.15.4. Now splited in brand, solid and regular
+%   fonts (regular not used).
 % - Header behaviour adjusted. Now each entry has two brackets. The first one
 %   is for the account name or the text showed on the page, and the second one
 %   is for the link. If the second bracket is empty the URL is made from the 
 %   profile name and the server URL.
+% - Change \makeletterclosing to \makeletterclosing[L]{}. If no parameters are
+%   provided then \@firstname and \@lastname are used. Optional arg C, R or L 
+%   is for alignment (L by default).
 % 
 
 
 %-------------------------------------------------------------------------------
 %                Identification
 %-------------------------------------------------------------------------------
-\ProvidesClass{awesome-cv}[2021 v1.0 Curriculum Vitae]
+\ProvidesClass{awesome-cv}[2021 v1.1 Curriculum Vitae]
 \NeedsTeXFormat{LaTeX2e}
 
 
@@ -943,11 +946,14 @@
 }
 
 % Define a closing of the cover letter
-% Usage: \makeletterclosing
-\newcommand*{\makeletterclosing}{%
+% Usage: \makeletterclosing{name} or \makeletterclosing{}
+\newcommand*{\makeletterclosing}[2][L]{%
+  \ifthenelse{\equal{#1}{L}}{\raggedright}{\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
   \vspace{3.4mm}
   \lettertextstyle{\@letterclosing} \\\\
-  \letternamestyle{\@firstname\ \@lastname}
+  \ifthenelse{\isempty{#2}}%
+    {\letternamestyle{\@firstname\ \@lastname}}%
+    {\letternamestyle{#2}}
   \ifthenelse{\isundefined{\@letterenclosure}}
     {\\}
     {%
@@ -955,3 +961,4 @@
       \letterenclosurestyle{\@letterenclname: \@letterenclosure} \\
     }
 }
+
