@@ -10,9 +10,10 @@
 % http://www.posquit0.com
 %
 % Notes:
-% 1) This class file defines the structure and layout of the template file (cv.tex, resume.tex).
+% 1) This class file defines the structure and layout of the template file
+%    (cv.tex, resume.tex).
 % 2) It has been written in such a way that under most circumstances you
-% should not need to edit it.
+%    should not need to edit it.
 %
 % Class license:
 % LPPL v1.3c (https://www.latex-project.org/lppl)
@@ -828,7 +829,7 @@
 }
 
 % Define an extra position entry in the prev organization
-% Usage: \cvextendentry{<position>}{<date>}{<description>}
+% Usage: \cvextendentry{position}{date}{description}
 \newcommand*{\cvextendentry}[3]{%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
@@ -847,7 +848,7 @@
   \end{center}
 }
 % Define a subentry of cv information
-% Usage: \cvsubentry<description}{date}
+% Usage: \cvsubentry{description}{date}
 \newcommand*{\cvsubentry}[2]{%
   %\vspace{5.0mm}
   \setlength\tabcolsep{0pt}
@@ -945,19 +946,19 @@
   \lettertextstyle{\@letteropening}
 }
 
-% Define a closing of the cover letter
-% Usage: \makeletterclosing{name} or \makeletterclosing{}
+% Define a closing of the cover letter. Optional [L|C|R]
+% Usage: \makeletterclosing[L]{name} or \makeletterclosing{}
 \newcommand*{\makeletterclosing}[2][L]{%
   \ifthenelse{\equal{#1}{L}}{\raggedright}{\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
   \vspace{3.4mm}
-  \lettertextstyle{\@letterclosing} \\\\
+  \lettertextstyle{\@letterclosing} \\
   \ifthenelse{\isempty{#2}}%
     {\letternamestyle{\@firstname\ \@lastname}}%
     {\letternamestyle{#2}}
   \ifthenelse{\isundefined{\@letterenclosure}}
     {\\}
     {%
-      \\\\\\
+      \\
       \letterenclosurestyle{\@letterenclname: \@letterenclosure} \\
     }
 }
