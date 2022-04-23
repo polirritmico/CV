@@ -20,6 +20,10 @@
 ## TeXstudio session:
 *.txss2
 
+## VimTeX
+*.fdb_latexmk
+*.xdv
+
 ### Mac OS X ###
 ## Mac OS X metadata files:
 *.DS_Store
