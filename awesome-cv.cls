@@ -949,7 +949,8 @@
 % Usage: \makeletterclosing[L]{name} or \makeletterclosing{}
 \newcommand*{\makeletterclosing}[2][L]{%
   \ifthenelse{\equal{#1}{L}}{\raggedright}{\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
-  \vspace{3.4mm}
+  \vspace{7.4mm}
+  %\vspace{3.4mm}
   \lettertextstyle{\@letterclosing} \\
   \ifthenelse{\isempty{#2}}%
     {\letternamestyle{\@firstname\ \@lastname}}%
