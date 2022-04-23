@@ -74,12 +74,10 @@
 %-------------------------------------------------------------------------------
 \begin{document}
 
-% Add the HEADER with the defined personal information
-% Give optional argument to change alignment(C: center, L: left, R: right)
+% Add the HEADER. optional argument to change alignment [C|L|R]
 \makecvheader[R]
 
-% Print the footer with 3 arguments(<left>, <center>, <right>)
-% Leave any of these blank if they are not needed
+% Footer with 3 arguments ({L} {C} {R}). Leave blank if not needed
 \makecvfooter
   {}
   {Eduardo Bray G.~~~·~~~Carta de presentación}
@@ -89,37 +87,54 @@
 \makelettertitle
 
 %-------------------------------------------------------------------------------
-%	LETTER CONTENT
-%	Each section is imported separately, open each file in turn to modify content
-% If needed add \newpage between sections or a \vspace{X.Xmm} (can be negative)
+%                               CONTENIDO DE LA CARTA
 %-------------------------------------------------------------------------------
 \begin{cvletter}
 
-%Párrafo de apertura: Declara la razón por la que escribes, cómo te enteraste del cargo o la organización. Añadir información básica sobre ti mismo.
+% 1. [ ] Razón por la que escribo.
+% 2. [ ] Cómo me enteré del cargo o la organización.
+% 3. [ ] Añadir información básica de mí.
 
-Junto con saludar escribo esta carta con motivo del anuncio publicado en
-LUGARDONDESEPUBLICA
+Junto con saludar escribo esta carta en respuesta al anuncio publicado en
+\textbf{Linkedin} para postular al cargo de \textbf{Programador}. Pese a mi
+background en el área artística, siempre he dado soporte y desarrollado
+herramientas tecnológicas.
 
-%Segundo párrafo: Menciona por qué estás interesado por el empleo o escribe el trabajo que el empleador hace (decir simplemente que estás interesado no menciona las razones y puede parecer una carta-tipo). Demuestra que conoces suficiente del empleador o la posición para relacionar tus antecedentes con el empleador o la posición. Menciona habilidades específicas que te hacen encajar en las necesidades del empleador. (Enfócate lo que puedes hacer para el empleador, no en lo que el empleador puede hacer por ti.) Esta es una oportunidad para explicar con más detalle ítems relevantes de tu currículum. Refiérete al hecho que tu currículum está adjunto. Menciona otros adjuntos si son requeridos para la posición.
+%\lettersection{Sobre mí}
+Mi principal interés en el puesto tiene relación con aplicar los conocimientos
+en \lsc{TDD} en línea a los últimos flujos de trabajo como los que practica su
+empresa.
 
-%Tercer párrafo: Indica que quieres la oportunidad de tener una entrevista por el puesto o que quieres conversar con el empleador para aprender más acerca de oportunidades o planes de contratación. Menciona lo que harás para hacer seguimiento, como llamar por teléfono al empleador en un par de semanas. Si vas a estar cerca de la ubicación del empleador podrías ofrecer una visita, indicar cuando. Indica que estarías encantado de proveer cualquier información adicional que se requiera. Agradece al empleador por su consideración.
+% 1. [ ] Por qué estoy interesado por el empleo o el trabajo que hace la empresa
+% 2. [ ] Mencionar información del empleador o la posición (demuestra interés)
+% 3. [ ] Mencionar habilidades específicas que te hacen encajar en el perfil
+%        (Lo que puedes hacer por el empleador)
+% 4. [ ] Comentar detalles relevantes del CV.
 
-\lettersection{Sobre mí}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis. Vivamus at neque arcu, sed tempor quam. Curabitur pharetra tincidunt tincidunt.
+%\lettersection{¿Por qué esta empresa?}
+Suspendisse commodo, massa eu congue tincidunt, elit mauris pellentesque orci,
+cursus tempor odio nisl euismod augue. Aliquam adipiscing nibh ut odio sodales
+et pulvinar tortor laoreet. Mauris a accumsan ligula.
 
-\lettersection{¿Por qué esta empresa?}
-Suspendisse commodo, massa eu congue tincidunt, elit mauris pellentesque orci, cursus tempor odio nisl euismod augue. Aliquam adipiscing nibh ut odio sodales et pulvinar tortor laoreet. Mauris a accumsan ligula.
+% 1. [ ] Indicar que quiero la oportunidad de la entrevista por el puesto, o
+%        el poder conversar con el empleador para aprender más de oportunidades
+%        o planes de contratación.
+% 2. [ ] Mencionar cómo haré el seguimiento, llamar al empleador, enviar mail...
+% 3. [ ] Si estoy cerca ofrecesr visita y fecha.
+% 4. [ ] Encantado de proveer información adicional.
+% 5. [ ] Agradecimiento por la consideración.
 
-\lettersection{¿Por qué soy el indicado?}
-Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et sagittis. Ut interdum, enim varius pellentesque tincidunt, magna libero sodales tortor, ut fermentum nunc metus a ante.
+%\lettersection{¿Por qué soy el indicado?}
+Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et
+sagittis. Ut interdum, enim varius pellentesque tincidunt, magna libero sodales
+tortor, ut fermentum nunc metus a ante.
 
 \end{cvletter}
 
 
 %-------------------------------------------------------------------------------
-% Print the signature and enclosures with above letter informations
+%                                  PIE DE PÁGINA 
 %-------------------------------------------------------------------------------
-%\makeletterclosing[L|C|R]{}. If empty uses @firstname and @lastname.
-\makeletterclosing{Eduardo Javier Bray Gutiérrez}
+\makeletterclosing[L]{Eduardo Javier Bray Gutiérrez}
 
 \end{document}
