@@ -12,7 +12,7 @@ Mi CV en formato LaTeX para su rápido ajuste y compartición.
 ## Compilación
 
 Desde TeXstudio o directamente con:
-```bash
+```command
 $ xelatex -synctex=1 -interaction=nonstopmode "curriculum".tex
 ```
 
