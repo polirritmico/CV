@@ -2,7 +2,7 @@
 
 #=== SH_SCRIPT  ================================================================
 #         NAME:   CVBuild
-#  DESCRIPTION:   A script to build a Awesome LaTeX CV into a PDF file.
+#  DESCRIPTION:   A script to generate a Awesome LaTeX CV PDF file.
 #         DATE:   2022/05/21
 #===============================================================================
 
@@ -18,15 +18,26 @@ set -euo pipefail
 #-----------------------------------------------------------------------
 
 SCRIPT_VERSION="0.1"
-SHORT_DESCRIPTION="A script to build a Awesome LaTeX CV into a PDF file."
+SHORT_DESCRIPTION="A script to generate a Awesome LaTeX CV PDF file."
 SCRIPT_NAME="CVBuild"
 DEFAULT_FILE="curriculum.tex"
 DEFAULT_LETTER="carta.tex"
 
-# Terminal output colors
+# Terminal output font styles and colors
 GREEN="\033[0;32m"
 ORANGE="\033[0;33m"
-NC="\033[0m" # No color
+CYAN="\033[0;36m"
+RED="\e[31m"
+BLD="\033[1m" # Bold
+ITL="\033[3m" #Italic
+NS="\033[0m" # No style
+
+STLCMD="\033[1;36m"
+STLOPT="\033[1;32m"
+STLARG="\033[1;32m"
+STLFIL="\033[0;33m"
+STLERR="\e[0;31m"
+STLUND="\e[4m"
 
 # Get the real script filename even through a symbolic link
 SCRIPT_RUN="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
@@ -38,7 +49,8 @@ SCRIPT_RUN="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 #===============================================================================
 function version()
 {
-    echo -e "$SCRIPT_NAME v$SCRIPT_VERSION, ${SHORT_DESCRIPTION,}"
+    echo -e "$BLD$SCRIPT_NAME v$SCRIPT_VERSION$NS"
+    echo -e "$ITL$SHORT_DESCRIPTION$NS\n"
 
 }  # ------------  end of function version  ------------
 
@@ -49,19 +61,19 @@ function version()
 #===============================================================================
 function help()
 {
-    echo -e "Usage: $SCRIPT_RUN [FILE]
-       $SCRIPT_RUN [OPTION]... [FILE] [OUTFILE]
-       $SCRIPT_RUN -l [OUTFILE]
+    echo -e "${BLD}Usage: $STLCMD$SCRIPT_RUN $STLARG[FILE]
+       $STLCMD$SCRIPT_RUN $STLARG[OPTION]... [FILE] [OUTFILE]
+       $STLCMD$SCRIPT_RUN $STLARG-l [OUTFILE]$NS
 Make a filename.pdf (or OUTFILE) from the input tex FILE.
 If no input FILE is entered, the default $DEFAULT_FILE file is built.
 
-Options:
-  -p|presentation [FILE]   Replace the default CV presentation text with the
-                           passed FILE content.
-  -o|output [FILE]         Set the OUTFILE. Useful when no input FILE is passed.
-  -l|letter                Set $DEFAULT_LETTER as input FILE. 
-  -h|help                  Display this help message.
-  -v|version               Display the version of $SCRIPT_NAME and exit."
+${BLD}Options:
+$STLOPT  -p|presentation [FILE]   ${NS}Replace the default CV presentation text with the
+$STLOPT                           ${NS}passed FILE content.
+$STLOPT  -o|output [FILE]         ${NS}Set the OUTFILE. Useful when no input FILE is passed.
+$STLOPT  -l|letter                ${NS}Set $DEFAULT_LETTER as input FILE. 
+$STLOPT  -h|help                  ${NS}Display this help message.
+$STLOPT  -v|version               ${NS}Display the version of $SCRIPT_NAME and exit."
 
 }  # ------------  end of function help  ------------
 
@@ -104,12 +116,13 @@ while getopts ":p:o:lhv" opt
                 exit 0
                 ;;
             :)
-                echo "Invalid option: '-$OPTARG' requires an argument"
+                echo -e "$STLERR$SCRIPT_NAME:"\
+                        "Invalid option -- '-$OPTARG' requires an argument$NS\n"
                 help
                 exit 1
                 ;;
             *)
-                echo -e "$SCRIPT_NAME: Invalid option -- '-$OPTARG'"
+                echo -e "$STLERR$SCRIPT_NAME: Invalid option -- '-$OPTARG'$NS\n"
                 help
                 exit 1
                 ;;
@@ -123,7 +136,7 @@ shift $(($OPTIND-1))
 #-------------------------------------------------------------------------------
 
 if [[ $# -gt max_args ]]; then
-    echo -e "$SCRIPT_NAME: Unable to infer IN/OUT file. Read script usage.\n"
+    echo -e "$RED$SCRIPT_NAME: Unable to infer IN/OUT file. Read script usage.$NS\n"
     help
     exit 1
 fi
@@ -152,9 +165,9 @@ function makepdf()
     extension="${filename##*.}"
     filename="${filename%.*}"
 
-    echo -e "Generando PDF a partir de $ORANGE$input_file$NC"
-    xelatex -synctex=1 -interaction=batchmode -halt-on-error "$input_file"
-    echo -e "\n$GREENOK$NC\n$ORANGE$filename.pdf$NC generado exitosamente."
+    echo -e "Generating PDF file from $ORANGE$input_file$NS with xelatex..."
+    #xelatex -synctex=1 -interaction=batchmode -halt-on-error "$input_file"
+    echo -e "\n${GREEN}OK$NS\nFile$ORANGE $filename.pdf$NS has been generated."
 
 }  # ------------  end of function makepdf  ------------
 
