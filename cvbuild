@@ -44,7 +44,6 @@ STLUND="\e[4m"
 # Get the real script filename even through a symbolic link
 SCRIPT_RUN="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 
-
 #-----------------------------------------------------------------------
 # Check dependencies
 #-----------------------------------------------------------------------
@@ -65,6 +64,21 @@ fi
 
 
 #===  FUNCTION  ================================================================
+#         NAME:   Check file
+#  DESCRIPTION:   Check if the input file exist
+#===============================================================================
+function check_file()
+{
+    if [[ ! -f $1 ]]; then
+        echo -e "${RED}$SCRIPT_RUN: $1: No such file or directory.$NS"
+        exit 1
+    fi
+
+}  # ------------  end of function check_file  ------------
+
+
+
+#===  FUNCTION  ================================================================
 #         NAME:   Version
 #  DESCRIPTION:   Show script name, script version and short description.
 #===============================================================================
@@ -78,7 +92,7 @@ function version()
 
 
 #===  FUNCTION  ================================================================
-#         NAME:   help
+#         NAME:   Help
 #  DESCRIPTION:   Show the script usage and documentation help
 #===============================================================================
 function help()
@@ -116,6 +130,23 @@ function makepdf()
     echo -e "\n${GREEN}OK$NS\nFile$ORANGE $filename.pdf$NS has been generated."
 
 }  # ------------  end of function makepdf  ------------
+
+
+
+#===  FUNCTION  ================================================================
+#         NAME:   Move file
+#  DESCRIPTION:   Move or rename the output FILE.pdf to OUTFILE.
+#                 Add .pdf extension if not provided
+#===============================================================================
+function move_file()
+{
+    if [[ $output_file != *.pdf ]]; then
+        output_file="$output_file.pdf"
+    fi
+    echo -e "Se mueve salida a $output_file"
+    #mv $input_file $output_file
+
+}  # ------------  end of function move_file  ------------
 
 
 
@@ -178,7 +209,8 @@ shift $(($OPTIND-1))
 #-------------------------------------------------------------------------------
 
 if [[ $# -gt max_args ]]; then
-    echo -e "$RED$SCRIPT_NAME: Unable to infer IN/OUT file. Read script usage.$NS\n"
+    echo -e "$RED$SCRIPT_NAME: Unable to infer IN/OUT file."\
+            "Read script usage.$NS\n"
     help
     exit 1
 fi
@@ -204,9 +236,14 @@ fi
 # 
 #-------------------------------------------------------------------------------
 
-#readfile
-#change presentation input
-makepdf
+if [[ $presentation_file != "" ]]; then
+    check_file $presentation_file
+    #readfile $presentation_file
+    #change presentation input
+fi
+#makepdf
 #revert presentation change
-#movefile
+if [[ $output_file != "" ]]; then
+    move_file
+fi
 
