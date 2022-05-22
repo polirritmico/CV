@@ -188,7 +188,7 @@ elif [[ $# -gt 0 ]]; then
     fi
     shift
 fi
-# Lastly if no -o is passed there could be a outfile arg remaining
+# Lastly if no '-o' is passed there could be a outfile arg remaining
 if [[ $# -gt 0 ]]; then
     output_file=$1
     shift
@@ -200,11 +200,11 @@ fi
 #===============================================================================
 function make_pdf()
 {
-    filename=$(basename -- "$input_file")
+    filename=$(basename -- "$1")
     extension="${filename##*.}"
     filename="${filename%.*}"
 
-    echo -e "Generating PDF file from $ORANGE$input_file$NS with xelatex..."
+    echo -e "Generating PDF file from $ORANGE$1$NS with xelatex..."
     #xelatex -synctex=1 -interaction=batchmode -halt-on-error "$input_file"
     echo -e "\n${GREEN}OK$NS\nFile$ORANGE $filename.pdf$NS has been generated."
 
@@ -230,6 +230,28 @@ function move_file()
 
 
 #===  FUNCTION  ================================================================
+#         NAME:   Check file
+#  DESCRIPTION:   Check if the passed FILE exist.
+#===============================================================================
+function check_file()
+{
+    echo -en "Checking file: '$ORANGE$1$NS'... "
+    # -d check a directory
+    if [[ -d $1 ]]; then
+        echo -e "\n${RED}$SCRIPT_RUN: '$1': Is a directory.$NS"
+        exit 1
+    #-f check if file exist
+    elif [[ ! -f $1 ]]; then
+        echo -e "\n${RED}$SCRIPT_RUN: '$1': No such file or directory.$NS"
+        exit 1
+    fi
+    echo -e "${GREEN}OK$NS"
+
+}  # ------------  end of function check_file  ------------
+
+
+
+#===  FUNCTION  ================================================================
 #         NAME:   Change presentation
 #  DESCRIPTION:   Copy the input File to the passed destination, then replace
 #                 the presentation file with the setted one on the copied file. #===============================================================================
@@ -242,30 +264,6 @@ function change_presentation()
 
 
 
-#===  FUNCTION  ================================================================
-#         NAME:   Check file
-#  DESCRIPTION:   Check if the passed FILE exist.
-#===============================================================================
-function check_file()
-{
-    echo -e "Checking file '$1'..."
-    if [[ -d $1 ]]; then
-        echo -e "${RED}$SCRIPT_RUN: '$1': Is a directory.$NS"
-        exit 1
-    fi
-    #-f check if file exist
-    if [[ ! -f $1 ]]; then
-        echo -e "${RED}$SCRIPT_RUN: '$1': No such file or directory.$NS"
-        exit 1
-    fi
-    echo -e "OK"
-#    if [[ $_missing -eq 1 && ! -f ]]
-#    else
-#        echo -e "OK"
-}  # ------------  end of function check_file  ------------
-
-
-
 #===============================================================================
 # BEGINNING OF SCRIPT WORK
 #===============================================================================
@@ -274,8 +272,9 @@ check_file $input_file
 
 if [[ $presentation_file != "" ]]; then
     check_file $presentation_file
-#    change_presentation $work_file $TEMP_CVBUILD_FILE
-#    work_file=$TEMP_CVBUILD_FILE
+    change_presentation $input_file $TEMP_CVBUILD_FILE
+    #make_pdf $TEMP_CVBUILD_FILE
+    #rm $TEMP_CVBUILD_FILE
 fi
 
 #make_pdf
