@@ -6,20 +6,23 @@
 #         DATE:   2022/05/21
 #===============================================================================
 
-#-----------------------------------------------------------------------
-#  Default values
-#-----------------------------------------------------------------------
-
 # e - script stops on error (return !=0)
 # u - error if undefined variable
 # o pipefail - script fails if one of piped command fails
 # x - output each line (debug)
 set -euo pipefail
 
+
+#-----------------------------------------------------------------------
+#  Global settings
+#-----------------------------------------------------------------------
+
 SCRIPT_VERSION="0.1"
 SHORT_DESCRIPTION="A script to build a Awesome LaTeX CV into a PDF file."
 SCRIPT_NAME="CVBuild"
 SCRIPT_RUN="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+DEFAULT_FILE="curriculum.tex"
+DEFAULT_LETTER="carta.tex"
 
 
 #===  FUNCTION  ================================================================
@@ -39,22 +42,44 @@ function version()
 #===============================================================================
 function help()
 {
-    echo -e "Usage: $SCRIPT_RUN [OPTION]... [FILE]
+    echo -e "Usage: $SCRIPT_RUN [FILE]
        $SCRIPT_RUN [OPTION]... [FILE] [OUTFILE]
+Make a filename.pdf (or OUTFILE) from the input tex FILE.
+If no input FILE is entered, the default $DEFAULT_FILE file is built.
 
 Options:
-  -h|help          Display this message
-  -v|version       Display script version"
+  -p|presentation [FILE]   Replace the default CV presentation text with the
+                           passed FILE content.
+  -o|output [FILE]         Set the OUTFILE. Useful when no input FILE is passed.
+  -l|letter                Set $DEFAULT_LETTER as input FILE.
+  -h|help                  Display this help message.
+  -v|version               Display the version of $SCRIPT_NAME and exit."
 
 }  # ------------  end of function help  ------------
 
 
 #-------------------------------------------------------------------------------
+#  Default var
+#-------------------------------------------------------------------------------
+
+presentation_file=""
+input_file="curriculum.tex"
+output_file=""
+expected_entries_count=2
+
+#-------------------------------------------------------------------------------
 #  Handle command line arguments
 #-------------------------------------------------------------------------------
-while getopts ":hv" opt
+while getopts ":hvp:o:" opt
     do
         case $opt in
+            p|presentation)
+                presentation_file=$OPTARG
+                ;;
+            o|output)
+                output_file=$OPTARG
+                expected_entries_cou
+                ;;
             h|help)
                 version
                 help
@@ -64,12 +89,34 @@ while getopts ":hv" opt
                 version
                 exit 0
                 ;;
+            :)
+                echo "Invalid option: '-$OPTARG' requires an argument"
+                help
+                exit 1
+                ;;
             *)
                 echo -e "$SCRIPT_NAME: Invalid option -- '-$OPTARG'"
                 help
                 exit 1
                 ;;
     esac
-done    # ----------  end of function usage  ----------
+done    # ----------  end of getopts handler  ----------
 shift $(($OPTIND-1))
+
+
+#-------------------------------------------------------------------------------
+# Check and read IN/OUT files
+#-------------------------------------------------------------------------------
+
+if [[ $# -gt 2 ]]; then
+    echo -e "$SCRIPT_NAME: Unable to infer IN/OUT file. Read script usage.\n"
+    help
+    exit 1
+elif [[ $# -gt 0 ]]; then
+    input_file=$1
+    shift
+fi
+if [[ $# -eq 1 ]]; then
+    output_file=$1
+fi
 
