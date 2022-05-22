@@ -23,7 +23,7 @@ SHORT_DESCRIPTION="A script to generate a Awesome LaTeX CV PDF file."
 
 DEFAULT_FILE="curriculum.tex"
 DEFAULT_LETTER="carta.tex"
-DEFAULT_PRESENTATION="sections/resumen.tex"
+#DEFAULT_PRESENTATION="sections/resumen.tex"
 TEMP_CVBUILD_FILE="_cvbuil_temp_file.tex"
 
 DEPENDENCIES=( "xelatex" )
@@ -206,7 +206,7 @@ function make_pdf()
 
     echo -e "Generating PDF file from $ORANGE$1$NS with xelatex..."
     #xelatex -synctex=1 -interaction=batchmode -halt-on-error "$input_file"
-    echo -e "\n${GREEN}OK$NS\nFile$ORANGE $filename.pdf$NS has been generated."
+    echo -e "\n${GREEN}OK.$NS\nFile$ORANGE $filename.pdf$NS has been generated."
 
 }  # ------------  end of function make_pdf  ------------
 
@@ -232,20 +232,21 @@ function move_file()
 #===  FUNCTION  ================================================================
 #         NAME:   Check file
 #  DESCRIPTION:   Check if the passed FILE exist.
+#       INPUTS:   $1: Description, $2 FILE
 #===============================================================================
 function check_file()
 {
-    echo -en "Checking file: '$ORANGE$1$NS'... "
+    echo -en "Checking $1: '$ORANGE$2$NS'... "
     # -d check a directory
-    if [[ -d $1 ]]; then
-        echo -e "\n${RED}$SCRIPT_RUN: '$1': Is a directory.$NS"
+    if [[ -d $2 ]]; then
+        echo -e "\n${RED}$SCRIPT_RUN: '$2': Is a directory.$NS"
         exit 1
     #-f check if file exist
-    elif [[ ! -f $1 ]]; then
-        echo -e "\n${RED}$SCRIPT_RUN: '$1': No such file or directory.$NS"
+    elif [[ ! -f $2 ]]; then
+        echo -e "\n${RED}$SCRIPT_RUN: '$2': No such file or directory.$NS"
         exit 1
     fi
-    echo -e "${GREEN}OK$NS"
+    echo -e "${GREEN}OK.$NS"
 
 }  # ------------  end of function check_file  ------------
 
@@ -254,11 +255,17 @@ function check_file()
 #===  FUNCTION  ================================================================
 #         NAME:   Change presentation
 #  DESCRIPTION:   Copy the input File to the passed destination, then replace
-#                 the presentation file with the setted one on the copied file. #===============================================================================
+#                 the presentation file with the setted one on the copied file.
+#       INPUTS:   $1: Presentation file, $2: Working temp file 
+#===============================================================================
 function change_presentation()
 {
-    cp $1 $2
-    sed -i "s/\\input{sections\/$DEFAULT_PRESENTATION}/\\input\{sections\/$presentation_file\}/" $2
+    echo -en "Replacing presentation file with:"\
+            "'$ORANGE$1$NS'... "
+    cp $input_file $2
+    # $1 could contain '/' so we need to make the substitution inside call
+    sed -i "s/\\input{sections\/resumen.tex}/\\input\{${1//\//\\/}\}/" $2
+    echo -e "${GREEN}OK.$NS"
 
 }  # ------------  end of function change_presentation  ------------
 
@@ -268,13 +275,13 @@ function change_presentation()
 # BEGINNING OF SCRIPT WORK
 #===============================================================================
 
-check_file $input_file
+check_file "input file" $input_file
 
 if [[ $presentation_file != "" ]]; then
-    check_file $presentation_file
-    change_presentation $input_file $TEMP_CVBUILD_FILE
-    #make_pdf $TEMP_CVBUILD_FILE
-    #rm $TEMP_CVBUILD_FILE
+    check_file "presentation file" $presentation_file
+    change_presentation $presentation_file $TEMP_CVBUILD_FILE
+    make_pdf $TEMP_CVBUILD_FILE
+    rm $TEMP_CVBUILD_FILE
 fi
 
 #make_pdf
