@@ -115,7 +115,7 @@ $STLOPT  -v|version               ${NS}Display the version of $SCRIPT_NAME and e
 presentation_file=""
 input_file="$DEFAULT_FILE"
 output_file=""
-letter_mode=0
+letter_mode=false
 max_args=2 # Max. args with non options should be 2, input and output file
 
 
@@ -130,10 +130,10 @@ while getopts ":p:o:lhv" opt
                 ;;
             o|output)
                 output_file=$OPTARG
-                ((max_args--))
+                ((--max_args))
                 ;;
             l|letter)
-                letter_mode=1
+                letter_mode=true
                 input_file="$DEFAULT_LETTER"
                 ((--max_args))
                 ;;
@@ -163,19 +163,25 @@ shift $(($OPTIND-1))
 
 
 #-------------------------------------------------------------------------------
-# Check for extra arguments and get IN/OUT files
+# Check for extra arguments, bad combinations and get IN/OUT files
 #-------------------------------------------------------------------------------
 
 if [[ $# -gt max_args ]]; then
     echo -e "$RED$SCRIPT_NAME: Unable to infer IN/OUT file."\
             "Read script usage.$NS\n"
-    help
+    exit 1
+fi
+
+if [[ $letter_mode = true && $presentation_file != "" ]]; then
+    echo -e "$RED$SCRIPT_NAME: Letter and presentation can't be"\
+            "used at the same time.$NS"
     exit 1
 fi
 
 # If letter mode is used, then no input file is needed and the
 # remaining arg should be outfile.
-if [[ $letter_mode -eq 1 && $# -eq 1 ]]; then
+if [[ $letter_mode = true && $# -eq 1 ]]; then
+    echo letter mode
     output_file=$1
     shift
 # Either -o is used or not, the first remaining arg should be the inputfile
@@ -197,12 +203,14 @@ fi
 #===  FUNCTION  ================================================================
 #         NAME:   Make PDF
 #  DESCRIPTION:   Build the PDF file with xelatex
+#    ARGUMENTS:   $1: Target
 #===============================================================================
 function make_pdf()
 {
-    filename=$(basename -- "$1")
-    extension="${filename##*.}"
+    filename=$(basename -- "/test/file.tex")
+    echo $filename
     filename="${filename%.*}"
+    echo $filename
 
     echo -e "Generating PDF file from $ORANGE$1$NS with xelatex..."
     #xelatex -synctex=1 -interaction=batchmode -halt-on-error "$input_file"
@@ -213,26 +221,28 @@ function make_pdf()
 
 
 #===  FUNCTION  ================================================================
-#         NAME:   Move file
-#  DESCRIPTION:   Move or rename the output FILE.pdf to OUTFILE.
-#                 Add .pdf extension if not provided
+#         NAME:   Move output file
+#  DESCRIPTION:   Move or rename the output FILE.pdf to OUTFILE. Adds pdf
+#                 extension if not provided.
+#    ARGUMENTS:   $1: FILE, $2: Target.
 #===============================================================================
-function move_file()
+function move_output_file()
 {
-    if [[ $output_file != *.pdf ]]; then
+    if [[ $2 != *.pdf ]]; then
         output_file="$output_file.pdf"
     fi
-    echo -e "Se mueve salida a $output_file"
+    echo -en "Moving $1 to $2..."
     #mv $input_file $output_file
 
-}  # ------------  end of function move_file  ------------
+
+}  # ------------  end of function move_output_file  ------------
 
 
 
 #===  FUNCTION  ================================================================
 #         NAME:   Check file
 #  DESCRIPTION:   Check if the passed FILE exist.
-#       INPUTS:   $1: Description, $2 FILE
+#    ARGUMENTS:   $1: Description, $2 FILE
 #===============================================================================
 function check_file()
 {
@@ -256,7 +266,7 @@ function check_file()
 #         NAME:   Change presentation
 #  DESCRIPTION:   Copy the input File to the passed destination, then replace
 #                 the presentation file with the setted one on the copied file.
-#       INPUTS:   $1: Presentation file, $2: Working temp file 
+#    ARGUMENTS:   $1: Presentation file, $2: Working temp file 
 #===============================================================================
 function change_presentation()
 {
@@ -281,11 +291,12 @@ if [[ $presentation_file != "" ]]; then
     check_file "presentation file" $presentation_file
     change_presentation $presentation_file $TEMP_CVBUILD_FILE
     make_pdf $TEMP_CVBUILD_FILE
-    rm $TEMP_CVBUILD_FILE
+    #move out file
+    #clean presentation
 fi
+#elif [[ condition ]]; then
+    
 
-#make_pdf
-#revert presentation change
 if [[ $output_file != "" ]]; then
     move_file
 fi
