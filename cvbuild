@@ -213,7 +213,7 @@ function make_pdf()
     echo $filename
 
     echo -e "Generating PDF file from $ORANGE$1$NS with xelatex..."
-    #xelatex -synctex=1 -interaction=batchmode -halt-on-error "$input_file"
+    xelatex -synctex=1 -interaction=batchmode -halt-on-error "$input_file"
     echo -e "\n${GREEN}OK.$NS\nFile$ORANGE $filename.pdf$NS has been generated."
 
 }  # ------------  end of function make_pdf  ------------
@@ -291,7 +291,7 @@ if [[ $presentation_file != "" ]]; then
     check_file "presentation file" $presentation_file
     change_presentation $presentation_file $TEMP_CVBUILD_FILE
     make_pdf $TEMP_CVBUILD_FILE
-    #move out file
+    move_output_file $TEMP_CVBUILD_FILE $output_file
     #clean presentation
 fi
 #elif [[ condition ]]; then
