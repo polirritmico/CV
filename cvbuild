@@ -26,7 +26,7 @@ DEFAULT_LETTER="carta"
 #DEFAULT_PRESENTATION="sections/resumen.tex"
 TEMP_FILE="_temp_cvbuild_file"
 
-DEPENDENCIES=( "xelatex" )
+DEPENDENCIES=( "xelatex" "xdg-open" )
 
 
 #----------------------------------------
@@ -101,6 +101,7 @@ $STLOPT  -p|presentation [FILE]   ${NS}Replace the default CV presentation text 
 $STLOPT                           ${NS}passed FILE content.
 $STLOPT  -o|output [FILE]         ${NS}Set the OUTFILE. Useful when no input FILE is passed.
 $STLOPT  -l|letter                ${NS}Set $DEFAULT_LETTER as input FILE.
+$STLOPT  -w|watch                 ${NS}Open and view the pdf after the build process.
 $STLOPT  -h|help                  ${NS}Display this help message.
 $STLOPT  -v|version               ${NS}Display the version of $SCRIPT_NAME and exit."
 
@@ -117,13 +118,14 @@ output_file=""
 presentation_file=""
 
 letter_mode=false
+watch=false
 max_args=2 # Max. args with non options should be 2, input and output file
 
 
 #-------------------------------------------------------------------------------
 #  Handle command line arguments
 #-------------------------------------------------------------------------------
-while getopts ":p:o:lhv" opt
+while getopts ":p:o:lwhv" opt
     do
         case $opt in
             p|presentation)
@@ -136,6 +138,9 @@ while getopts ":p:o:lhv" opt
             l|letter)
                 letter_mode=true
                 ((max_args--))
+                ;;
+            w|watch)
+                watch=true
                 ;;
             h|help)
                 version
@@ -290,7 +295,7 @@ check_file $input_file "Input file"
 
 if [[ $presentation_file != "" ]]; then
     check_file $presentation_file "presentation file"
-    change_presentation $input_file $presentation_file 
+    change_presentation $input_file $presentation_file
     make_pdf $TEMP_FILE true $input_file
     echo -e "${GREEN}OK.$NS PDF file has been generated."
 
@@ -304,6 +309,10 @@ else
         mv ${input_file%.*}.pdf $output_file
     fi
     echo -e "File$ORANGE ${output_file}$NS has been successfully generated."
+fi
+
+if [[ $watch = true ]]; then
+    xdg-open $output_file 2> /dev/null
 fi
 
 exit 0
