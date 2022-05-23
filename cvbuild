@@ -113,9 +113,10 @@ input_file=""
 output_file=""
 presentation_file=""
 
+max_args=2 # Max. args with non options should be 2, input and output file
 letter_mode=false
 watch=false
-max_args=2 # Max. args with non options should be 2, input and output file
+need_backup=false
 
 
 #-------------------------------------------------------------------------------
@@ -227,8 +228,7 @@ function check_file()
 #===============================================================================
 function change_presentation()
 {
-    echo -en "Replacing presentation file with:"\
-            "$ORANGE'$1'$NS... "
+    echo -en "Replacing presentation file with: $ORANGE'$1'$NS... "
     cp $1 $TEMP_FILE
     # $1 could contain '/' so we need to make the substitution inside call
     sed -i "s/\\input{sections\/resumen.tex}/\\input\{${2//\//\\/}\}/" $TEMP_FILE
@@ -290,6 +290,13 @@ fi
 #-------------------------------------------------------------------------------
 check_file $input_file "Input file"
 
+# If for example, cv.pdf already exist and we use cv.tex as input and other.pdf
+# as output, then the existing cv.pdf should be preserved. Therefore we need
+# make a backup before the make_pdf function.
+if [[ ${input_file%.*} != ${output_file%.*} && -f ${input_file%.*}.pdf ]]; then
+    need_backup=true
+fi
+
 if [[ $presentation_file != "" ]]; then
     check_file $presentation_file "presentation file"
     change_presentation $input_file $presentation_file
@@ -301,11 +308,20 @@ if [[ $presentation_file != "" ]]; then
             "has\nbeen successfully generated."
     rm $TEMP_FILE*
 else
+    if [[ $need_backup = true ]]; then
+        mv ${input_file%.*}.pdf $TEMP_FILE.pdf
+    fi
+
     make_pdf $input_file false
     if [[ "${input_file%.*}.pdf" != "$output_file" ]]; then
         mv ${input_file%.*}.pdf $output_file
     fi
-    echo -e "File$ORANGE ${output_file}$NS has been successfully generated."
+
+    # Restore the backup if needed
+    if [[ $need_backup = true ]]; then
+        mv $TEMP_FILE.pdf ${input_file%.*}.pdf
+    fi
+    echo -e "File$ORANGE '${output_file}'$NS has been successfully generated."
 fi
 
 #----------------------------------------
@@ -316,3 +332,4 @@ fi
 
 exit 0
 
+EOF
