@@ -21,10 +21,10 @@ SCRIPT_NAME="CVBuild"
 SCRIPT_VERSION="0.1"
 SHORT_DESCRIPTION="A script to generate a Awesome LaTeX CV PDF file."
 
-DEFAULT_FILE="curriculum.tex"
-DEFAULT_LETTER="carta.tex"
+DEFAULT_INPUT_FILE="curriculum"
+DEFAULT_LETTER="carta"
 #DEFAULT_PRESENTATION="sections/resumen.tex"
-TEMP_CVBUILD_FILE="_cvbuil_temp_file.tex"
+TEMP_CVBUILD_FILE="_cvbuil_temp_file"
 
 DEPENDENCIES=( "xelatex" )
 
@@ -93,14 +93,14 @@ function help()
        $STLCMD$SCRIPT_RUN $STLARG[OPTION]... [FILE] [OUTFILE]
        $STLCMD$SCRIPT_RUN $STLARG-l [OUTFILE]$NS
 Make a filename.pdf (or OUTFILE) from the input tex FILE.
-If no input FILE is entered, the default $DEFAULT_FILE file is built.
+If no input FILE is entered, the default $DEFAULT_INPUT_FILE file is built.
 If FILE has no extension '.tex' is added.
 
 ${BLD}Options:
 $STLOPT  -p|presentation [FILE]   ${NS}Replace the default CV presentation text with the
 $STLOPT                           ${NS}passed FILE content.
 $STLOPT  -o|output [FILE]         ${NS}Set the OUTFILE. Useful when no input FILE is passed.
-$STLOPT  -l|letter                ${NS}Set $DEFAULT_LETTER as input FILE. 
+$STLOPT  -l|letter                ${NS}Set $DEFAULT_LETTER as input FILE.
 $STLOPT  -h|help                  ${NS}Display this help message.
 $STLOPT  -v|version               ${NS}Display the version of $SCRIPT_NAME and exit."
 
@@ -112,9 +112,10 @@ $STLOPT  -v|version               ${NS}Display the version of $SCRIPT_NAME and e
 #  Default variables
 #-------------------------------------------------------------------------------
 
-presentation_file=""
-input_file="$DEFAULT_FILE"
+input_file=""
 output_file=""
+presentation_file=""
+
 letter_mode=false
 max_args=2 # Max. args with non options should be 2, input and output file
 
@@ -130,12 +131,11 @@ while getopts ":p:o:lhv" opt
                 ;;
             o|output)
                 output_file=$OPTARG
-                ((--max_args))
+                ((max_args--))
                 ;;
             l|letter)
                 letter_mode=true
-                input_file="$DEFAULT_LETTER"
-                ((--max_args))
+                ((max_args--))
                 ;;
             h|help)
                 version
@@ -181,17 +181,11 @@ fi
 # If letter mode is used, then no input file is needed and the
 # remaining arg should be outfile.
 if [[ $letter_mode = true && $# -eq 1 ]]; then
-    echo letter mode
     output_file=$1
     shift
 # Either -o is used or not, the first remaining arg should be the inputfile
 elif [[ $# -gt 0 ]]; then
-    # If the argument has no tex extension, we add it here.
-    if [[ $1 != *.tex ]]; then
-        input_file="$1.tex"
-    else
-        input_file=$1
-    fi
+    input_file=$1
     shift
 fi
 # Lastly if no '-o' is passed there could be a outfile arg remaining
@@ -207,14 +201,9 @@ fi
 #===============================================================================
 function make_pdf()
 {
-    filename=$(basename -- "/test/file.tex")
-    echo $filename
-    filename="${filename%.*}"
-    echo $filename
-
     echo -e "Generating PDF file from $ORANGE$1$NS with xelatex..."
-    xelatex -synctex=1 -interaction=batchmode -halt-on-error "$input_file"
-    echo -e "\n${GREEN}OK.$NS\nFile$ORANGE $filename.pdf$NS has been generated."
+    xelatex -synctex=1 -interaction=batchmode -halt-on-error "$1"
+    echo -e "\n${GREEN}OK.$NS\nFile$ORANGE ${1%.*}.pdf$NS has been generated."
 
 }  # ------------  end of function make_pdf  ------------
 
@@ -231,8 +220,9 @@ function move_output_file()
     if [[ $2 != *.pdf ]]; then
         output_file="$output_file.pdf"
     fi
-    echo -en "Moving $1 to $2..."
-    #mv $input_file $output_file
+    echo -en "Moving $ORANGE$1$NS to $ORANGE$2$NS..."
+    mv $input_file $output_file
+    echo -e "${GREEN}OK.$NS"
 
 
 }  # ------------  end of function move_output_file  ------------
@@ -246,14 +236,14 @@ function move_output_file()
 #===============================================================================
 function check_file()
 {
-    echo -en "Checking $1: '$ORANGE$2$NS'... "
+    echo -en "Checking ${2,,}: '$ORANGE$1$NS'... "
     # -d check a directory
-    if [[ -d $2 ]]; then
-        echo -e "\n${RED}$SCRIPT_RUN: '$2': Is a directory.$NS"
+    if [[ -d $1 ]]; then
+        echo -e "\n${RED}$SCRIPT_RUN: '$1': Is a directory.$NS"
         exit 1
     #-f check if file exist
-    elif [[ ! -f $2 ]]; then
-        echo -e "\n${RED}$SCRIPT_RUN: '$2': No such file or directory.$NS"
+    elif [[ ! -f $1 ]]; then
+        echo -e "\n${RED}$SCRIPT_RUN: '$1': No such file or directory.$NS"
         exit 1
     fi
     echo -e "${GREEN}OK.$NS"
@@ -266,7 +256,7 @@ function check_file()
 #         NAME:   Change presentation
 #  DESCRIPTION:   Copy the input File to the passed destination, then replace
 #                 the presentation file with the setted one on the copied file.
-#    ARGUMENTS:   $1: Presentation file, $2: Working temp file 
+#    ARGUMENTS:   $1: Presentation file, $2: Working temp file
 #===============================================================================
 function change_presentation()
 {
@@ -281,23 +271,78 @@ function change_presentation()
 
 
 
+#===  FUNCTION  ================================================================
+#         NAME:   Clean presentation temp files
+#  DESCRIPTION:   Clean temp build files when changing the presentation text
+#===============================================================================
+function clean_presentation_temp_files()
+{
+    basename="${1%.*}"
+    echo $basename
+
+}  # ------------  end of function clean_presentation_temp_files  ------------
+
+
+
 #===============================================================================
 # BEGINNING OF SCRIPT WORK
 #===============================================================================
 
-check_file "input file" $input_file
+# TODO: input output files with or without extension?
+function info () {
+    echo -e "\n\n---------------------------------------------"
+    echo -e "              PRINT PATHS"
+    echo -e "---------------------------------------------"
+    echo -e "input_file: '$input_file'"
+    echo -e "output_file: '$output_file'"
+    echo -e "presentation_file: '$presentation_file'"
+    echo -e "---------------------------------------------\n\n"
+}
+
+#input_file
+#output_file
+
+#presentation_file
+#DEFAULT_INPUT_FILE
+#DEFAULT_LETTER
+#TEMP_CVBUILD_FILE
+
+#-------------------------------------------------------------------------------
+# Prepare paths
+#-------------------------------------------------------------------------------
+if [[ $letter_mode = true ]]; then
+    input_file="$DEFAULT_LETTER.tex"
+elif [[ $input_file == "" ]]; then
+    input_file="$DEFAULT_INPUT_FILE.tex"
+elif [[ $input_file != *.tex ]]; then
+    input_file="$input_file.tex"
+fi
+
+if [[ $output_file == "" ]]; then
+    if [[ $letter_mode = true ]]; then
+        output_file="$DEFAULT_LETTER.pdf"
+    else
+        output_file="$DEFAULT_INPUT_FILE.pdf"
+    fi
+elif [[ $output_file != *.pdf ]]; then
+    output_file="$output_file.pdf"
+fi
+
+
+check_file $input_file "Input file"
 
 if [[ $presentation_file != "" ]]; then
-    check_file "presentation file" $presentation_file
-    change_presentation $presentation_file $TEMP_CVBUILD_FILE
-    make_pdf $TEMP_CVBUILD_FILE
-    move_output_file $TEMP_CVBUILD_FILE $output_file
-    #clean presentation
+    check_file $presentation_file "presentation file"
+#    change_presentation $presentation_file $TEMP_CVBUILD_FILE
+#    make_pdf $TEMP_CVBUILD_FILE
+#
+#    if [[ $output_file == "" ]]; then
+#        echo $input_file
+#        output_file="${input_file%.*}.pdf"
+#    fi
+#
+#    move_output_file "${TEMP_CVBUILD_FILE%.*}.pdf" $output_file
+#    clean_presentation_temp_files
 fi
-#elif [[ condition ]]; then
-    
 
-if [[ $output_file != "" ]]; then
-    move_file
-fi
 
