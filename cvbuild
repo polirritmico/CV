@@ -24,7 +24,7 @@ SHORT_DESCRIPTION="A script to generate a Awesome LaTeX CV PDF file."
 DEFAULT_INPUT_FILE="curriculum"
 DEFAULT_LETTER="carta"
 #DEFAULT_PRESENTATION="sections/resumen.tex"
-TEMP_CVBUILD_FILE="_cvbuil_temp_file"
+TEMP_FILE="_temp_cvbuild_file"
 
 DEPENDENCIES=( "xelatex" )
 
@@ -195,48 +195,13 @@ if [[ $# -gt 0 ]]; then
 fi
 
 #===  FUNCTION  ================================================================
-#         NAME:   Make PDF
-#  DESCRIPTION:   Build the PDF file with xelatex
-#    ARGUMENTS:   $1: Target
-#===============================================================================
-function make_pdf()
-{
-    echo -e "Generating PDF file from $ORANGE$1$NS with xelatex..."
-    xelatex -synctex=1 -interaction=batchmode -halt-on-error "$1"
-    echo -e "\n${GREEN}OK.$NS\nFile$ORANGE ${1%.*}.pdf$NS has been generated."
-
-}  # ------------  end of function make_pdf  ------------
-
-
-
-#===  FUNCTION  ================================================================
-#         NAME:   Move output file
-#  DESCRIPTION:   Move or rename the output FILE.pdf to OUTFILE. Adds pdf
-#                 extension if not provided.
-#    ARGUMENTS:   $1: FILE, $2: Target.
-#===============================================================================
-function move_output_file()
-{
-    if [[ $2 != *.pdf ]]; then
-        output_file="$output_file.pdf"
-    fi
-    echo -en "Moving $ORANGE$1$NS to $ORANGE$2$NS..."
-    mv $input_file $output_file
-    echo -e "${GREEN}OK.$NS"
-
-
-}  # ------------  end of function move_output_file  ------------
-
-
-
-#===  FUNCTION  ================================================================
 #         NAME:   Check file
 #  DESCRIPTION:   Check if the passed FILE exist.
 #    ARGUMENTS:   $1: Description, $2 FILE
 #===============================================================================
 function check_file()
 {
-    echo -en "Checking ${2,,}: '$ORANGE$1$NS'... "
+    echo -en "Checking ${2,,}: $ORANGE'$1'$NS... "
     # -d check a directory
     if [[ -d $1 ]]; then
         echo -e "\n${RED}$SCRIPT_RUN: '$1': Is a directory.$NS"
@@ -256,15 +221,15 @@ function check_file()
 #         NAME:   Change presentation
 #  DESCRIPTION:   Copy the input File to the passed destination, then replace
 #                 the presentation file with the setted one on the copied file.
-#    ARGUMENTS:   $1: Presentation file, $2: Working temp file
+#    ARGUMENTS:   $1: Input file, $2: Presentation file
 #===============================================================================
 function change_presentation()
 {
     echo -en "Replacing presentation file with:"\
-            "'$ORANGE$1$NS'... "
-    cp $input_file $2
+            "$ORANGE'$1'$NS... "
+    cp $1 $TEMP_FILE
     # $1 could contain '/' so we need to make the substitution inside call
-    sed -i "s/\\input{sections\/resumen.tex}/\\input\{${1//\//\\/}\}/" $2
+    sed -i "s/\\input{sections\/resumen.tex}/\\input\{${2//\//\\/}\}/" $TEMP_FILE
     echo -e "${GREEN}OK.$NS"
 
 }  # ------------  end of function change_presentation  ------------
@@ -272,40 +237,30 @@ function change_presentation()
 
 
 #===  FUNCTION  ================================================================
-#         NAME:   Clean presentation temp files
-#  DESCRIPTION:   Clean temp build files when changing the presentation text
+#         NAME:   Make PDF
+#  DESCRIPTION:   Build the PDF file with xelatex
+#    ARGUMENTS:   $1: Target, $2: bool, if true passed $3: base file for message
 #===============================================================================
-function clean_presentation_temp_files()
+function make_pdf()
 {
-    basename="${1%.*}"
-    echo $basename
+    if [[ $2 = true ]]; then
+        _source_tex=$3
+    else
+        _source_tex=$1
+    fi
+    echo -e "Generating PDF file from $ORANGE'$_source_tex'$NS with xelatex..."
+    echo -e "-----------------------------------------------------------"
+    xelatex -synctex=1 -interaction=batchmode -halt-on-error "$1"
+    #echo -e "\n${GREEN}OK.$NS\nFile$ORANGE ${2%.*}.pdf$NS has been generated."
+    echo -e "\n-----------------------------------------------------------"
 
-}  # ------------  end of function clean_presentation_temp_files  ------------
+}  # ------------  end of function make_pdf  ------------
 
 
 
 #===============================================================================
 # BEGINNING OF SCRIPT WORK
 #===============================================================================
-
-# TODO: input output files with or without extension?
-function info () {
-    echo -e "\n\n---------------------------------------------"
-    echo -e "              PRINT PATHS"
-    echo -e "---------------------------------------------"
-    echo -e "input_file: '$input_file'"
-    echo -e "output_file: '$output_file'"
-    echo -e "presentation_file: '$presentation_file'"
-    echo -e "---------------------------------------------\n\n"
-}
-
-#input_file
-#output_file
-
-#presentation_file
-#DEFAULT_INPUT_FILE
-#DEFAULT_LETTER
-#TEMP_CVBUILD_FILE
 
 #-------------------------------------------------------------------------------
 # Prepare paths
@@ -328,21 +283,28 @@ elif [[ $output_file != *.pdf ]]; then
     output_file="$output_file.pdf"
 fi
 
-
+#-------------------------------------------------------------------------------
+# Generate the PDF file and also move and clean extra files
+#-------------------------------------------------------------------------------
 check_file $input_file "Input file"
 
 if [[ $presentation_file != "" ]]; then
     check_file $presentation_file "presentation file"
-#    change_presentation $presentation_file $TEMP_CVBUILD_FILE
-#    make_pdf $TEMP_CVBUILD_FILE
-#
-#    if [[ $output_file == "" ]]; then
-#        echo $input_file
-#        output_file="${input_file%.*}.pdf"
-#    fi
-#
-#    move_output_file "${TEMP_CVBUILD_FILE%.*}.pdf" $output_file
-#    clean_presentation_temp_files
+    change_presentation $input_file $presentation_file 
+    make_pdf $TEMP_FILE true $input_file
+    echo -e "${GREEN}OK.$NS PDF file has been generated."
+
+    mv $TEMP_FILE.pdf $output_file
+    echo -e "File$ORANGE $output_file$NS with $ORANGE'$presentation_file'$NS"\
+            "has\nbeen successfully generated."
+    rm $TEMP_FILE*
+else
+    make_pdf $input_file false
+    if [[ "${input_file%.*}.pdf" != "$output_file" ]]; then
+        mv ${input_file%.*}.pdf $output_file
+    fi
+    echo -e "File$ORANGE ${output_file}$NS has been successfully generated."
 fi
 
+exit 0
 
