@@ -90,7 +90,7 @@ function help()
        $STLCMD$SCRIPT_RUN $STLARG[OPTION]... [FILE] [OUTFILE]
        $STLCMD$SCRIPT_RUN $STLARG-l [OUTFILE]$NS
 Make a filename.pdf (or OUTFILE) from the input tex FILE.
-If no input FILE is entered, the default $DEFAULT_INPUT_FILE file is built.
+If no input FILE is entered, the default '$DEFAULT_INPUT_FILE' file is built.
 If FILE has no extension '.tex' is added.
 
 ${BLD}Options:

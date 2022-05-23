@@ -3,7 +3,7 @@ Curriculum Vitae
 
 Mi CV en formato LaTeX para su rápido ajuste y compartición.
 
-## CV en PDF
+## PDF Generado
 
 | Pág. 1 | Pág. 2 |
 |:---:|:---:|
@@ -11,15 +11,18 @@ Mi CV en formato LaTeX para su rápido ajuste y compartición.
 
 ## Compilación
 
-Utilice `cvbuilder`, un script bash creado por mi específicamente para esta tarea:
+`CVBuilder`, un script bash creado por mi específicamente para esta tarea:
 
 ```command
+CVBuild v0.1
+A script to generate a Awesome LaTeX CV PDF file.
+
 Usage: cvbuilder [FILE]
        cvbuilder [OPTION]... [FILE] [OUTFILE]
        cvbuilder -l [OUTFILE]
 Make a filename.pdf (or OUTFILE) from the input tex FILE.
-If no input FILE is entered, the default $DEFAULT_INPUT_FILE file is built.
-If FILE has no extension '.tex' is added.
+If no input FILE is entered, the default 'curriculum' file is built.
+If FILE has no extension, '.tex' is added.
 
 Options:
   -p|presentation [FILE]   Replace the default CV presentation text with the
@@ -33,12 +36,20 @@ Options:
 
 ### Alternativas
 
-* Con el botón en TeXstudio
+* TeXstudio
 
 * Directamente con:
 ```command
 $ xelatex -synctex=1 -interaction=nonstopmode "curriculum".tex
 ```
+
+## Requirimientos
+
+Programas básicos de cualquier sistema operativo GNU/Linux con los siguientes
+paquetes adicionales:
+
+* xelatex (en el paquete texlive-latexextra, latexrecommended o texlive-xetex)
+* xdg-open (xdg-utils)
 
 ---
 
