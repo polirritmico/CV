@@ -34,6 +34,14 @@ Options:
   -v|version               Display the version of $SCRIPT_NAME and exit.
 ```
 
+### Requirimientos
+
+Programas básicos de cualquier sistema operativo GNU/Linux con los siguientes
+paquetes adicionales:
+
+* xelatex (en el paquete texlive-latexextra, latexrecommended o texlive-xetex)
+* xdg-open (xdg-utils)
+
 ### Alternativas
 
 * TeXstudio
@@ -43,14 +51,6 @@ Options:
 $ xelatex -synctex=1 -interaction=nonstopmode "curriculum".tex
 ```
 
-## Requirimientos
-
-Programas básicos de cualquier sistema operativo GNU/Linux con los siguientes
-paquetes adicionales:
-
-* xelatex (en el paquete texlive-latexextra, latexrecommended o texlive-xetex)
-* xdg-open (xdg-utils)
-
 ---
 
-Diseño ajustado desde https://github.com/posquit0/Awesome-CV.
+Diseño base modificado a partir de https://github.com/posquit0/Awesome-CV.
