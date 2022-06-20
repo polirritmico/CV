@@ -11,7 +11,8 @@ Mi CV en formato LaTeX para su rápido ajuste y compartición.
 
 ## Compilación
 
-`CVBuilder`, un script bash creado por mi específicamente para esta tarea:
+`CVBuilder`, un ~~pequeño~~ script bash que hice específicamente para esta
+tarea:
 
 ```command
 CVBuild v0.1
