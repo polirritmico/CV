@@ -41,6 +41,7 @@ Programas básicos de cualquier sistema operativo GNU/Linux con los siguientes
 paquetes adicionales:
 
 * xelatex (en el paquete texlive-latexextra, latexrecommended o texlive-xetex)
+* texlive-fontsextra
 * xdg-open (xdg-utils)
 
 ### Alternativas
