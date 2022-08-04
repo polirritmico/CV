@@ -14,6 +14,16 @@ Mi CV en formato LaTeX para su rápido ajuste y compartición.
 `CVBuilder`, un ~~pequeño~~ script bash que hice específicamente para esta
 tarea:
 
+### Uso
+
+```command
+$ ./cvbuild -w curriculum
+```
+
+```command
+$ ./cvbuild -o "$HOME/CV.pdf" -w
+```
+
 ```command
 CVBuild v0.2
 A script to generate a Awesome LaTeX CV PDF file.
