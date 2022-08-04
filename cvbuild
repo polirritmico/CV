@@ -30,7 +30,6 @@ DEPENDENCIES=( "xelatex" "xdg-open" )
 
 #----------------------------------------
 # Terminal output font styles and colors
-# TODO: Remove unnused and fix var syntax
 GREEN="\033[0;32m"
 ORANGE="\033[0;33m"
 RED="\e[31m"
@@ -285,7 +284,7 @@ fi
 #-------------------------------------------------------------------------------
 # Generate the PDF file and also move and clean extra files
 #-------------------------------------------------------------------------------
-check_file $input_file "Input file"
+check_file "$input_file" "Input file"
 
 # If for example, cv.pdf already exist and we use cv.tex as input and other.pdf
 # as output, then the existing cv.pdf should be preserved. Therefore we need
@@ -297,26 +296,26 @@ fi
 if [[ $presentation_file != "" ]]; then
     check_file "$presentation_file" "presentation file"
     change_presentation "$input_file" "$presentation_file"
-    make_pdf $TEMP_FILE true $input_file
+    make_pdf "$TEMP_FILE" true "$input_file"
     echo -e "${GREEN}OK.$NS PDF file has been generated."
 
-    mv $TEMP_FILE.pdf $output_file
+    mv "$TEMP_FILE.pdf" "$output_file"
     echo -e "File$ORANGE $output_file$NS with $ORANGE'$presentation_file'$NS"\
             "has\nbeen successfully generated."
-    rm $TEMP_FILE*
+    rm "$TEMP_FILE*"
 else
     if [[ $need_backup = true ]]; then
-        mv ${input_file%.*}.pdf $TEMP_FILE.pdf
+        mv "${input_file%.*}.pdf" "$TEMP_FILE.pdf"
     fi
 
     make_pdf $input_file false
     if [[ "${input_file%.*}.pdf" != "$output_file" ]]; then
-        mv ${input_file%.*}.pdf $output_file
+        mv "${input_file%.*}.pdf" "$output_file"
     fi
 
     # Restore the backup if needed
     if [[ $need_backup = true ]]; then
-        mv $TEMP_FILE.pdf ${input_file%.*}.pdf
+        mv "$TEMP_FILE.pdf" "${input_file%.*}.pdf"
     fi
     echo -e "File$ORANGE '${output_file}'$NS has been successfully generated."
 fi
@@ -324,7 +323,7 @@ fi
 #----------------------------------------
 # Open the generated file
 if [[ $watch = true ]]; then
-    xdg-open $output_file 2> /dev/null
+    xdg-open "${output_file}" 2> /dev/null
 fi
 
 exit 0
