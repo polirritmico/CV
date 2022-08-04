@@ -15,7 +15,7 @@ Mi CV en formato LaTeX para su rápido ajuste y compartición.
 tarea:
 
 ```command
-CVBuild v0.1
+CVBuild v0.2
 A script to generate a Awesome LaTeX CV PDF file.
 
 Usage: cvbuilder [FILE]
