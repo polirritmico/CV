@@ -26,13 +26,13 @@ If no input FILE is entered, the default 'curriculum' file is built.
 If FILE has no extension, '.tex' is added.
 
 Options:
-  -p|presentation [FILE]   Replace the default CV presentation text with the
-                           passed FILE content.
-  -o|output [FILE]         Set the OUTFILE. Useful when no input FILE is passed.
-  -l|letter                Set $DEFAULT_LETTER as input FILE.
-  -w|watch                 Open and view the pdf after the build process.
-  -h|help                  Display this help message.
-  -v|version               Display the version of $SCRIPT_NAME and exit.
+  -p (presentation) [FILE]  Replace the default CV presentation text with the
+                            passed FILE content.
+  -o (output) [FILE]        Set the OUTFILE. Useful when no input FILE is passed.
+  -l (letter)               Set $DEFAULT_LETTER as input FILE.
+  -w (watch)                Open and view the pdf after the build process.
+  -h (help)                 Display this help message.
+  -v (version)              Display the version of $SCRIPT_NAME and exit.
 ```
 
 ### Requirimientos
