@@ -17,7 +17,7 @@ set -euo pipefail
 #  Global settings
 #-----------------------------------------------------------------------
 SCRIPT_NAME="CVBuild"
-SCRIPT_VERSION="0.2"
+SCRIPT_VERSION="0.3"
 SHORT_DESCRIPTION="A script to generate a Awesome LaTeX CV PDF file."
 
 DEFAULT_INPUT_FILE="curriculum"
@@ -96,6 +96,7 @@ ${STLOPT}  -o (output) [FILE]       ${NS}Set the OUTFILE. Useful when no input F
 ${STLOPT}                           ${NS}passed.
 ${STLOPT}  -l (letter)              ${NS}Set ${DEFAULT_LETTER} as input FILE.
 ${STLOPT}  -w (watch)               ${NS}Open the pdf after the build process.
+${STLOPT}  -i (images)              ${NS}Generate preview images.
 ${STLOPT}  -h (help)                ${NS}Display this help message.
 ${STLOPT}  -v (version)             ${NS}Display the version of ${SCRIPT_NAME} and exit."
 
@@ -112,6 +113,7 @@ presentation_file=""
 
 max_args=2 # Max. args with non options should be 2, input and output file
 letter_mode=false
+images_mode=false
 watch=false
 need_backup=false
 
@@ -119,7 +121,7 @@ need_backup=false
 #-------------------------------------------------------------------------------
 #  Handle command line arguments
 #-------------------------------------------------------------------------------
-while getopts ":p:o:lwhv" opt
+while getopts ":p:o:liwhv" opt
     do
         case $opt in
             p) # Presentation
@@ -131,6 +133,10 @@ while getopts ":p:o:lwhv" opt
                 ;;
             l) # Letter mode
                 letter_mode=true
+                ((max_args--))
+                ;;
+            i) # Images mode
+                images_mode=true
                 ((max_args--))
                 ;;
             w) # Watch, open after
@@ -174,6 +180,14 @@ if [[ $letter_mode = true && $presentation_file != "" ]]; then
     echo -e "$RED$SCRIPT_NAME: Letter and presentation can't be"\
             "used at the same time.$NS"
     exit 1
+fi
+
+if [[ $images_mode = true ]]; then
+    echo -e "Generating images..."
+    convert -density 150 curriculum.pdf[0] -background white -alpha remove -quality 90 images/preview-1.png
+    convert -density 150 curriculum.pdf[1] -background white -alpha remove -quality 90 images/preview-2.png
+    echo -e "Done"
+    exit
 fi
 
 # If letter mode is used, then no input file is needed and the
