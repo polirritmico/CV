@@ -116,10 +116,10 @@ function set_english()
     if [ "$2" = true ]; then
         echo -en "${ITL}Setting language to english...${NS} "
         sed -i 's/\\spanishtrue/\\spanishfalse/' "$1"
+        echo -e "${GREEN}OK.$NS"
     else
         sed -i 's/\\spanishfalse/\\spanishtrue/' "$1"
     fi
-    echo -e "${GREEN}OK.$NS"
 }  # ------------  end of function set_english  ------------
 
 
