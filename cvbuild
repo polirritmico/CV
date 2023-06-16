@@ -182,6 +182,7 @@ if [[ $letter_mode = true && $presentation_file != "" ]]; then
     exit 1
 fi
 
+# Generate images mode
 if [[ $images_mode = true ]]; then
     echo -e "Generating images..."
     convert -density 150 curriculum.pdf[0] -background white -alpha remove -quality 90 images/preview-1.png
