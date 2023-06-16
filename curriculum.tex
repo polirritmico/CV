@@ -7,8 +7,9 @@
 % 'a4paper' size by default, use 'letterpaper' for US letter
 \documentclass[11pt, a4paper]{awesome-cv}
 
-% Español
-%\usepackage[spanish]{babel}
+\newif\ifspanish\spanishtrue  %\spanishfalse
+
+\ifspanish\usepackage[spanish]{babel}\fi
 
 % Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
@@ -44,7 +45,11 @@
 %-------------------------------------------------------------------------------
 %	                                   HEADER
 %-------------------------------------------------------------------------------
-\input{sections/header-cv-eng.tex}
+\ifspanish
+  \input{sections/header.tex}
+\else
+  \input{sections/header-en.tex}
+\fi
 
 
 %-------------------------------------------------------------------------------
@@ -72,19 +77,20 @@
 % Check the example file to learn how this works
 %\input{sections/template_entry.tex}
 
-% \input{sections/resumen.tex}
-% \input{sections/habilidades.tex}
-% \input{sections/experiencia.tex}
-% \input{sections/estudios.tex}
-% \input{sections/extracurricular.tex}
-%\input{sections/escritura.tex}
-
-% English
-\input{sections/summary.tex}
-\input{sections/skills.tex}
-\input{sections/experience.tex}
-\input{sections/studies.tex}
-\input{sections/extracurricular-activity.tex}
+\ifspanish
+  \input{sections/resumen.tex}
+  \input{sections/habilidades.tex}
+  \input{sections/experiencia.tex}
+  \input{sections/estudios.tex}
+  \input{sections/extracurricular.tex}
+  %\input{sections/escritura.tex}
+\else % English
+  \input{sections/summary.tex}
+  \input{sections/skills.tex}
+  \input{sections/experience.tex}
+  \input{sections/studies.tex}
+  \input{sections/extracurricular-en.tex}
+\fi
 
 
 %-------------------------------------------------------------------------------
