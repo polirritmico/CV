@@ -95,12 +95,32 @@ ${STLOPT}                           ${NS}the passed FILE content.
 ${STLOPT}  -o (output) [FILE]       ${NS}Set the OUTFILE. Useful when no input FILE is
 ${STLOPT}                           ${NS}passed.
 ${STLOPT}  -l (letter)              ${NS}Set ${DEFAULT_LETTER} as input FILE.
+${STLOPT}  -e (english)             ${NS}Set ifspanish to false.
 ${STLOPT}  -w (watch)               ${NS}Open the pdf after the build process.
 ${STLOPT}  -i (images)              ${NS}Generate preview images.
 ${STLOPT}  -h (help)                ${NS}Display this help message.
 ${STLOPT}  -v (version)             ${NS}Display the version of ${SCRIPT_NAME} and exit."
 
 }  # ------------  end of function help  ------------
+
+
+
+#===  FUNCTION  ================================================================
+#         NAME:   Set english
+#  DESCRIPTION:   Change ifspanish LaTeX value to false.
+#    ARGUMENTS:   $1: File to edit.
+#                 $2: Boolean value
+#===============================================================================
+function set_english()
+{
+    if [ "$2" = true ]; then
+        echo -en "${ITL}Setting language to english...${NS} "
+        sed -i 's/\\spanishtrue/\\spanishfalse/' "$1"
+    else
+        sed -i 's/\\spanishfalse/\\spanishtrue/' "$1"
+    fi
+    echo -e "${GREEN}OK.$NS"
+}  # ------------  end of function set_english  ------------
 
 
 
@@ -116,12 +136,13 @@ letter_mode=false
 images_mode=false
 watch=false
 need_backup=false
+english=false
 
 
 #-------------------------------------------------------------------------------
 #  Handle command line arguments
 #-------------------------------------------------------------------------------
-while getopts ":p:o:liwhv" opt
+while getopts ":p:o:liewhv" opt
     do
         case $opt in
             p) # Presentation
@@ -137,6 +158,10 @@ while getopts ":p:o:liwhv" opt
                 ;;
             i) # Images mode
                 images_mode=true
+                ((max_args--))
+                ;;
+            e) # Set english mode
+                english=true
                 ((max_args--))
                 ;;
             w) # Watch, open after
@@ -301,6 +326,8 @@ fi
 # Generate the PDF file and also move and clean extra files
 #-------------------------------------------------------------------------------
 check_file "$input_file" "Input file"
+
+set_english "$input_file" "$english"
 
 # If for example, cv.pdf already exist and we use cv.tex as input and other.pdf
 # as output, then the existing cv.pdf should be preserved. Therefore we need
