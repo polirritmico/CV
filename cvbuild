@@ -207,15 +207,6 @@ if [[ $letter_mode = true && $presentation_file != "" ]]; then
     exit 1
 fi
 
-# Generate images mode
-if [[ $images_mode = true ]]; then
-    echo -e "Generating images..."
-    convert -density 150 curriculum.pdf[0] -background white -alpha remove -quality 90 images/preview-1.png
-    convert -density 150 curriculum.pdf[1] -background white -alpha remove -quality 90 images/preview-2.png
-    echo -e "Done"
-    exit
-fi
-
 # If letter mode is used, then no input file is needed and the
 # remaining arg should be outfile.
 if [[ $letter_mode = true && $# -eq 1 ]]; then
@@ -300,6 +291,18 @@ function make_pdf()
 #===============================================================================
 # BEGINNING OF SCRIPT WORK
 #===============================================================================
+
+#-------------------------------------------------------------------------------
+# Generate images from existing pdf
+#-------------------------------------------------------------------------------
+if [[ $images_mode = true ]]; then
+    echo -e "Generating images..."
+    convert -density 150 curriculum.pdf[0] -background white -alpha remove -quality 90 images/preview-1.png
+    convert -density 150 curriculum.pdf[1] -background white -alpha remove -quality 90 images/preview-2.png
+    echo -e "Done"
+    exit
+fi
+
 
 #-------------------------------------------------------------------------------
 # Prepare paths
