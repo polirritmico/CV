@@ -7,9 +7,6 @@
 % 'a4paper' size by default, use 'letterpaper' for US letter
 \documentclass[12pt, a4paper]{awesome-cv}
 
-% Español
-\usepackage[spanish]{babel}
-
 % Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
 
@@ -44,7 +41,7 @@
 %-------------------------------------------------------------------------------
 %	                                   HEADER
 %-------------------------------------------------------------------------------
-\input{sections/header-carta}
+\input{sections/header-letter}
 
 
 %-------------------------------------------------------------------------------
@@ -55,18 +52,18 @@
 
 % The company being applied to
 \recipient
-  {Equipo de recursos humanos}
-  {Nombre compañía.\\Dirección\\Localidad, CP}
+  {Human Resources Team}
+  {Company Name.\\Address\\City, Postal Code}
 % The date on the letter, default is the date of compilation
 \letterdate{\today}
 % The title of the letter
-\lettertitle{Solicitud de empleo para CARGO}
+\lettertitle{Job Application for POSITION}
 % How the letter is opened
-\letteropening{Estimado equipo de contratación,}
+\letteropening{Dear Hiring Team,}
 % How the letter is closed
-\letterclosing{Atentamente,}
+\letterclosing{Sincerely,}
 % Any enclosures with the letter
-\letterenclosure[Adjunto]{Curriculum vitae}
+\letterenclosure[Attached]{Curriculum Vitae}
 
 
 %-------------------------------------------------------------------------------
@@ -80,7 +77,7 @@
 % Footer with 3 arguments ({L} {C} {R}). Leave blank if not needed
 \makecvfooter
 {}
-{Eduardo Bray G.~~~·~~~Carta de presentación}
+{Eduardo Bray G.~~~·~~~Cover letter}
 {}
 
 % Print the title with above letter informations
@@ -91,21 +88,24 @@
 %-------------------------------------------------------------------------------
 \begin{cvletter}
 
-	Junto con saludar escribo esta carta en respuesta al anuncio publicado en
-	\textbf{Linkedin} para postular al cargo de \textbf{Programador}. Pese a mi
-	background en el área artística, siempre he dado soporte y desarrollado
-	herramientas tecnológicas.
+	I'm a responsible and proactive professional, enthusiastic about software
+	and technology. I have advanced knowledge of Linux systems and a keen
+	interest in creating tools that optimize and streamline development
+	workflows.
 
-	Mi principal interés en el puesto tiene relación con aplicar los conocimientos
-	en \lsc{TDD} en línea a los últimos flujos de trabajo como los que practica su
-	empresa.
+	I have studies in programming and advanced programming at the Pontificia
+	Universidad Católica de Chile, primarily working with C, C# and Python.
+
+	Additionally, I hold a degree in music and a separate degree in education.
+
+	These are my tasks and achievements from my previous works and projects:
 
 \end{cvletter}
 
 
 %-------------------------------------------------------------------------------
-%                                  PIE DE PÁGINA
+%                                     FOOTER
 %-------------------------------------------------------------------------------
-\makeletterclosing[L]{Eduardo Javier Bray Gutiérrez}
+\makeletterclosing[L]{Eduardo Javier Bray Guti\'{e}rrez}
 
 \end{document}
