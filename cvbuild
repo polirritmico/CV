@@ -18,11 +18,12 @@ set -euo pipefail
 #  Global settings
 #-----------------------------------------------------------------------
 SCRIPT_NAME="CVBuild"
-SCRIPT_VERSION="0.3"
+SCRIPT_VERSION="0.4"
 SHORT_DESCRIPTION="A script to generate a Awesome LaTeX CV PDF file."
 
 DEFAULT_INPUT_FILE="curriculum"
 DEFAULT_LETTER="carta"
+DEFAULT_EN_LETTER="letter"
 TEMP_FILE="_temp_cvbuild_file"
 
 DEPENDENCIES=( "xelatex" "xdg-open" )
@@ -94,7 +95,7 @@ ${STLOPT}  -p (presentation) [FILE] ${NS}Replace the default CV presentation tex
 ${STLOPT}                           ${NS}the passed FILE content.
 ${STLOPT}  -o (output) [FILE]       ${NS}Set the OUTFILE. Useful when no input FILE is
 ${STLOPT}                           ${NS}passed.
-${STLOPT}  -l (letter)              ${NS}Set ${DEFAULT_LETTER} as input FILE.
+${STLOPT}  -l (letter)              ${NS}Set ${DEFAULT_LETTER}/${DEFAULT_EN_LETTER} as input FILE.
 ${STLOPT}  -e (english)             ${NS}Set ifspanish to false.
 ${STLOPT}  -w (watch)               ${NS}Open the pdf after the build process.
 ${STLOPT}  -i (images)              ${NS}Generate preview images.
@@ -307,7 +308,9 @@ fi
 #-------------------------------------------------------------------------------
 # Prepare paths
 #-------------------------------------------------------------------------------
-if [[ $letter_mode = true ]]; then
+if [[ $letter_mode = true && $english = true ]]; then
+    input_file="$DEFAULT_EN_LETTER.tex"
+elif [[ $letter_mode = true ]]; then
     input_file="$DEFAULT_LETTER.tex"
 elif [[ $input_file == "" ]]; then
     input_file="$DEFAULT_INPUT_FILE.tex"
@@ -316,7 +319,9 @@ elif [[ $input_file != *.tex ]]; then
 fi
 
 if [[ $output_file == "" ]]; then
-    if [[ $letter_mode = true ]]; then
+    if [[ $letter_mode = true && $english = true ]]; then
+        output_file="$DEFAULT_EN_LETTER.pdf"
+    elif [[ $letter_mode = true ]]; then
         output_file="$DEFAULT_LETTER.pdf"
     else
         output_file="$DEFAULT_INPUT_FILE.pdf"
@@ -354,7 +359,7 @@ else
         mv "${input_file%.*}.pdf" "$TEMP_FILE.pdf"
     fi
 
-    make_pdf $input_file false
+    make_pdf "$input_file" false
     if [[ "${input_file%.*}.pdf" != "$output_file" ]]; then
         mv "${input_file%.*}.pdf" "$output_file"
     fi
@@ -374,4 +379,3 @@ fi
 
 exit 0
 
-EOF
