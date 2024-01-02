@@ -1,18 +1,17 @@
 Curriculum Vitae
 ================
 
-Mi CV en formato LaTeX para su rápido ajuste y compartición.
+My CV in LaTeX format for quick adjustments and easy sharing.
 
-## PDF Generado
+## Generated PDF
 
-| Pág. 1 | Pág. 2 |
+| Page 1 | Page 2 |
 |:---:|:---:|
-| [![Descargar PDF](images/preview-1.png?raw=true)](curriculum.pdf?raw=true "Descargar el PDF")  | [![Descargar PDF](images/preview-2.png?raw=true)](curriculum.pdf?raw=true "Descargar el PDF") |
+| [![Download PDF](images/preview-1.png?raw=true)](curriculum.pdf?raw=true "Click to download the full PDf")  | [![Download PDF](images/preview-2.png?raw=true)](curriculum.pdf?raw=true "Click to Download the full PDF") |
 
-## Compilación
+## Compilation
 
-`CVBuilder`, un ~~pequeño~~ script bash que hice específicamente para esta
-tarea:
+`CVBuilder`, a ~~small~~ bash script crafted specifically for this task:
 
 ### Uso
 
@@ -25,7 +24,7 @@ $ ./cvbuild -o "$HOME/CV.pdf" -w
 ```
 
 ```command
-CVBuild v0.2
+CVBuild v0.3
 A script to generate a Awesome LaTeX CV PDF file.
 
 Usage: cvbuilder [FILE]
@@ -45,24 +44,24 @@ Options:
   -v (version)              Display the version of $SCRIPT_NAME and exit.
 ```
 
-### Requirimientos
+### Requirements
 
-Programas básicos de cualquier sistema operativo GNU/Linux con los siguientes
-paquetes adicionales:
+Basic GNU/Linux dependencies with the following additional packages:
 
-* xelatex (en el paquete texlive-latexextra, latexrecommended o texlive-xetex)
+* xelatex (from texlive-latexextra, latexrecommended or texlive-xetex)
 * texlive-fontsextra
 * xdg-open (xdg-utils)
 
-### Alternativas
+### Manual build
 
-* TeXstudio
+* Build in TeXstudio
 
-* Directamente con:
+* Build using xelatex:
+
 ```command
 $ xelatex -synctex=1 -interaction=nonstopmode "curriculum".tex
 ```
 
 ---
 
-Diseño base modificado a partir de https://github.com/posquit0/Awesome-CV.
+Base design extensively adapted from https://github.com/posquit0/Awesome-CV.
