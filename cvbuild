@@ -281,6 +281,7 @@ function make_pdf()
     fi
     echo -e "Generating PDF file from $ORANGE'$_source_tex'$NS with xelatex..."
     echo -e "-----------------------------------------------------------"
+    # xelatex -synctex=1 -halt-on-error "$1" # verbose
     xelatex -synctex=1 -interaction=batchmode -halt-on-error "$1"
     #echo -e "\n${GREEN}OK.$NS\nFile$ORANGE ${2%.*}.pdf$NS has been generated."
     echo -e "\n-----------------------------------------------------------"
