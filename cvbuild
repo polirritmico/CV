@@ -35,7 +35,7 @@ GREEN="\033[0;32m"
 ORANGE="\033[0;33m"
 RED="\e[31m"
 BLD="\033[1m" # Bold
-ITL="\033[3m" #Italic
+ITL="\033[3m" # Italic
 NS="\033[0m" # No style
 
 STLCMD="\033[1;36m"
