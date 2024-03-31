@@ -1,13 +1,12 @@
-Curriculum Vitae
-================
+# Curriculum Vitae
 
 My CV in LaTeX format for quick adjustments and easy sharing.
 
 ## Generated PDF
 
-| Page 1 | Page 2 |
-|:---:|:---:|
-| [![Download PDF](images/preview-1.png?raw=true)](curriculum.pdf?raw=true "Click to download the full PDf")  | [![Download PDF](images/preview-2.png?raw=true)](curriculum.pdf?raw=true "Click to Download the full PDF") |
+|                                                   Page 1                                                   |                                                   Page 2                                                   |
+| :--------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: |
+| [![Download PDF](images/preview-1.png?raw=true)](curriculum.pdf?raw=true "Click to download the full PDf") | [![Download PDF](images/preview-2.png?raw=true)](curriculum.pdf?raw=true "Click to Download the full PDF") |
 
 ## Compilation
 
@@ -48,15 +47,24 @@ Options:
 
 Basic GNU/Linux dependencies with the following additional packages:
 
-* xelatex (from texlive-latexextra, latexrecommended or texlive-xetex)
-* texlive-fontsextra
-* xdg-open (xdg-utils)
+- xelatex (from texlive-latexextra, latexrecommended or texlive-xetex)
+- texlive-fontsextra
+- xdg-open (xdg-utils)
+
+#### Fedora
+
+```command
+sudo dnf install texlive-latex texlive-xetex texlive-collection-latex \
+    texlive-collection-latexrecommended texlive-xetex-def \
+    texlive-collection-xetex texlive-sourcesanspro texlive-tcolorbox \
+    texlive-babel-spanish texlive-hyphen-spanish
+```
 
 ### Manual build
 
-* Build in TeXstudio
+- Build in TeXstudio
 
-* Build using xelatex:
+- Build using xelatex:
 
 ```command
 $ xelatex -synctex=1 -interaction=nonstopmode "curriculum".tex
