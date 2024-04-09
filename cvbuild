@@ -25,6 +25,7 @@ DEFAULT_INPUT_FILE="curriculum"
 DEFAULT_LETTER="carta"
 DEFAULT_EN_LETTER="letter"
 TEMP_FILE="_temp_cvbuild_file"
+VERBOSE_BUILD=false
 
 DEPENDENCIES=( "xelatex" "xdg-open" )
 
@@ -281,8 +282,12 @@ function make_pdf()
     fi
     echo -e "Generating PDF file from $ORANGE'$_source_tex'$NS with xelatex..."
     echo -e "-----------------------------------------------------------"
-    # xelatex -synctex=1 -halt-on-error "$1" # verbose
-    xelatex -synctex=1 -interaction=batchmode -halt-on-error "$1"
+
+    if [[ $VERBOSE_BUILD = true ]]; then
+        xelatex -synctex=1 -halt-on-error "$1"
+    else
+        xelatex -synctex=1 -interaction=batchmode -halt-on-error "$1"
+    fi
     #echo -e "\n${GREEN}OK.$NS\nFile$ORANGE ${2%.*}.pdf$NS has been generated."
     echo -e "\n-----------------------------------------------------------"
 
@@ -324,6 +329,9 @@ if [[ $output_file == "" ]]; then
         output_file="$DEFAULT_EN_LETTER.pdf"
     elif [[ $letter_mode = true ]]; then
         output_file="$DEFAULT_LETTER.pdf"
+
+    elif [[ $english = true ]]; then
+        output_file="${DEFAULT_INPUT_FILE}_en.pdf"
     else
         output_file="$DEFAULT_INPUT_FILE.pdf"
     fi

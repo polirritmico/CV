@@ -47,9 +47,15 @@ Options:
 
 Basic GNU/Linux dependencies with the following additional packages:
 
-- xelatex (from texlive-latexextra, latexrecommended or texlive-xetex)
+- xelatex
 - texlive-fontsextra
-- xdg-open (xdg-utils)
+- xdg-open
+
+#### Gentoo
+
+```command
+emerge texlive-latexrecommended texlive-fontsextra
+```
 
 #### Fedora
 
