@@ -23,24 +23,27 @@ $ ./cvbuild -o "$HOME/CV.pdf" -w
 ```
 
 ```command
-CVBuild v0.3
+CVBuild v0.4
 A script to generate a Awesome LaTeX CV PDF file.
 
-Usage: cvbuilder [FILE]
-       cvbuilder [OPTION]... [FILE] [OUTFILE]
-       cvbuilder -l [OUTFILE]
+Usage: cvbuild [FILE]
+       cvbuild [OPTION]... [FILE] [OUTFILE]
+       cvbuild -l [OUTFILE]
 Make a filename.pdf (or OUTFILE) from the input tex FILE.
 If no input FILE is entered, the default 'curriculum' file is built.
-If FILE has no extension, '.tex' is added.
+If FILE has no extension '.tex' is added.
 
 Options:
-  -p (presentation) [FILE]  Replace the default CV presentation text with the
-                            passed FILE content.
-  -o (output) [FILE]        Set the OUTFILE. Useful when no input FILE is passed.
-  -l (letter)               Set $DEFAULT_LETTER as input FILE.
-  -w (watch)                Open and view the pdf after the build process.
-  -h (help)                 Display this help message.
-  -v (version)              Display the version of $SCRIPT_NAME and exit.
+  -p (presentation) [FILE] Replace the default CV presentation text with
+                           the passed FILE content.
+  -o (output) [FILE]       Set the OUTFILE. Useful when no input FILE is
+                           passed.
+  -l (letter)              Set carta/letter as input FILE.
+  -e (english)             Set ifspanish to false.
+  -w (watch)               Open the pdf after the build process.
+  -i (images)              Generate preview images.
+  -h (help)                Display this help message.
+  -v (version)             Display the version of CVBuild and exit.
 ```
 
 ### Requirements
@@ -54,7 +57,7 @@ Basic GNU/Linux dependencies with the following additional packages:
 #### Gentoo
 
 ```command
-emerge texlive-latexrecommended texlive-fontsextra
+emerge texlive-latexrecommended texlive-fontsextra texlive-latexextra
 ```
 
 #### Fedora
