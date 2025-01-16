@@ -828,6 +828,19 @@
   \end{tabular*}%
 }
 
+% Define an environment for cvitems(for cventry)
+\newenvironment{cvitems}{%
+  \vspace{-4.0mm}
+  \begin{justify}
+  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \setlength{\parskip}{0pt}
+    \renewcommand{\labelitemi}{\bullet}
+}{%
+  \end{itemize}
+  \end{justify}
+  \vspace{-4.0mm}
+}
+
 % Define an extra position entry in the prev organization
 % Usage: \cvextendentry{position}{date}{description}
 \newcommand*{\cvextendentry}[3]{%
@@ -893,19 +906,6 @@
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
 	~\skilltypestyle{#1} & \skillsetstyle{#2} \\
-}
-
-% Define an environment for cvitems(for cventry)
-\newenvironment{cvitems}{%
-  \vspace{-4.0mm}
-  \begin{justify}
-  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-    \setlength{\parskip}{0pt}
-    \renewcommand{\labelitemi}{\bullet}
-}{%
-  \end{itemize}
-  \end{justify}
-  \vspace{-4.0mm}
 }
 
 
