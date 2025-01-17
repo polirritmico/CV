@@ -838,7 +838,7 @@
 }{%
   \end{itemize}
   \end{justify}
-  \vspace{-4.0mm}
+  \vspace{0.8mm}
 }
 
 % Define an extra position entry in the prev organization
