@@ -24,7 +24,7 @@ DEFAULT_INPUT_FILE="curriculum"
 DEFAULT_LETTER="carta"
 DEFAULT_EN_LETTER="letter"
 TEMP_FILE="_temp_cvbuild_file"
-VERBOSE_BUILD=false # silent, quiet
+VERBOSE_MODE=false
 
 DEPENDENCIES=("xelatex" "xdg-open")
 
@@ -257,7 +257,7 @@ function make_pdf() {
     echo -e "Generating PDF file from $ORANGE'$_source_tex'$NS with xelatex..."
     echo -e "-----------------------------------------------------------"
 
-    if [[ $VERBOSE_BUILD = true ]]; then
+    if [[ $VERBOSE_MODE = true ]]; then
         xelatex -synctex=1 -halt-on-error "$1"
     else
         xelatex -synctex=1 -interaction=batchmode -halt-on-error "$1"
