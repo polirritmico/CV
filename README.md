@@ -12,7 +12,7 @@ My CV in LaTeX format for quick adjustments and easy sharing.
 
 `CVBuilder`, a ~~small~~ bash script crafted specifically for this task:
 
-### Uso
+### Usage
 
 ```command
 $ ./cvbuild -w curriculum
