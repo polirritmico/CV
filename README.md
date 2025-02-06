@@ -6,7 +6,8 @@ My CV in LaTeX format for quick adjustments and easy sharing.
 
 |                                                   Page 1                                                   |                                                   Page 2                                                   |
 | :--------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: |
-| [![Download PDF](images/preview-1.png?raw=true)](curriculum.pdf?raw=true "Click to download the full PDf") | [![Download PDF](images/preview-2.png?raw=true)](curriculum.pdf?raw=true "Click to Download the full PDF") |
+| [![Download PDF](images/preview-1.png?raw=true)]([curriculum.pdf](https://github.com/user-attachments/files/18693396/curriculum.pdf) "Click to download the full PDf") | [![Download PDF](images/preview-2.png?raw=true)]([curriculum.pdf](https://github.com/user-attachments/files/18693396/curriculum.pdf) "Click to Download the full PDF") |
+
 
 ## Compilation
 
