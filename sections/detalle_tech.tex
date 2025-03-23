@@ -1,0 +1,103 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../curriculum.tex
+
+\cvsection{Experiencias: Detalle de contribuciones}
+
+\begin{cvparagraph}
+    Diseñé e implemente un sistema de carga de datos modular que permitía integrar a
+    una BBDD PostgreSQL, Buckets S3 y Google Drive; datos desde planillas de cálculo
+    de Office, planillas en la nube de Google Sheets, LibreOffice Calc y GMail. La
+    arquitectura es lo suficientemente flexible para que cada integración sea
+    completamente independiente y testeable, confiriendo mucha flexibilidad al uso y
+    desarrollo.
+
+    Como frontend, por simplicidad y constrains de tiempo se utilizaron notebooks
+    jupyter, pero la API permitía integrarlo a cualquier librería de escritorio tipo
+    TK, Qt, Gtk, etc. o a cualquier framework web.
+
+    Para el deploy de esta aplicación, levanté una pequeña pipeline en Bitbucket que
+    aplicaba formateo automático (Black), ejecutaba los tests en una instancia que
+    también se generaba automáticamente y en caso de aprobar, generaba un artefacto
+    que utilizaba el equipo de analítica.
+
+    El sistema era tan versátil que incluso se utilizó para carga pseudo manual de
+    datos a través de correos-tipo que podían enviar los clientes.
+
+    En base a este desarrollo pasamos de integrar de 2 a 3 componentes semanales a
+    15 diarios.
+
+\end{cvparagraph}
+
+\newpage
+
+\null
+\cvsection{Código: Detalle de contribuciones}
+
+\begin{cventries}
+
+%---------------------------------------------------------
+  \cventry
+    {Librerías y herramientas} % Job title
+    {Contribuciones a proyectos Open Source} % Organization
+    {} % Location
+    {} % Date(s)
+    {
+    \begin{cvitems} % Description(s) of tasks/responsibilities
+      \item {\textbf{\href{https://github.com/polirritmico/ebook-scriptum}{polirritmico/ebook-scriptum}}\\ Arquitectura modular para transformar textos simples o de lenguaje de marcado (ebooks, html, xml, xhtml, markdown, etc.) a través de LLM, TTS u otras herramientas de conversión (ffmpeg, lame, id tags, etc.).}
+      \item {\textbf{\href{https://github.com/polirritmico/bakupipe}{polirritmico/bakupipe}}\\ Concepto de prueba para implementar un sistema de pipeline a través de scripts configurables con el entorno de desarrollo Godot. Aplica builds, tests unitarios, de aceptación, performance, etc., realiza un deploy a Github y a un repositorio de artefactos (Drive, GCP, etc.); y genera los logs.}
+      \item {\textbf{\href{https://github.com/polirritmico/Bakumapu-docs}{polirritmico/Bakumapu-docs}}\\ Documentación html generada automáticamente a partir del documento LaTeX.}
+      \item {\textbf{\href{https://github.com/polirritmico/ansible-bootstrap}{polirritmico/ansible-bootstrap}\href{https://github.com/polirritmico/ansible}{https://github.com/polirritmico/ansible}}\\ Configuración de entornos de desarrollo en Linux a través de técnicas de bootstraping con scripts Bash y playbooks Ansible (Ubuntu, Fedora, Gentoo, Arch).}
+    \end{cvitems}
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Plasma y Qt (C++)} % Job title
+    {KDE} % Organization
+    {} % Location
+    {} % Date(s)
+    {
+    \begin{cvitems} % Description(s) of tasks/responsibilities
+      \item {\textbf{\href{https://store.kde.org/p/2075700}{https://store.kde.org}}\\ Build script para modificar el tema de cursores original de KDE.}
+      \item {\textbf{\href{https://invent.kde.org/multimedia/elisa/-/merge_requests/478\#note_741609}{kde.org/multimedia/elisa}}\\ Implementar QStandard paths al reproductor de música Elisa (reproductor por defecto de KDE).}
+      \item {\textbf{\href{https://bugs.kde.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=CONFIRMED&bug_status=ASSIGNED&bug_status=REOPENED&email1=ebray187&emailassigned_to1=1&emailcc1=1&emaillongdesc1=1&emailreporter1=1&emailtype1=substring&order=Importance&query_format=advanced}{bugs.kde.org}}\\ Varios reportes de errores.}
+    \end{cvitems}
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Distribución Linux avanzada basada en paquetes fuentes y rolling release} % Job title
+    {Gentoo Linux} % Organization
+    {} % Location
+    {} % Date(s)
+    {
+    \begin{cvitems} % Description(s) of tasks/responsibilities
+      \item {\textbf{\href{https://github.com/polirritmico/gentoo-localrepo}{polirritmico/gentoo-localrepo}}\\ Repositorio con ebuilds personalizados}
+      \item {\textbf{\href{https://github.com/polirritmico/gentoo-patches}{polirritmico/gentoo-patches}}\\ Colección de parches personalizados a diferentes aplicaciones. Por ejemplo Dolphin (Personalizar aspectos visuales como ancho de barras, espaciados, etc.), Hydrogen (soporte XDG), Aegisub (suporte XDG, utf-8), Firefox (Personalizar algunos maps), Ghostty (bugfixes no integrados al upstream), neovim (ajustes de treesitter), etc.}
+      \item {\textbf{\href{https://forums.gentoo.org/search.php?search_author=ebray187}{forums.gentoo.org}}\\ Guías, tutoriales, documentación y soporte a usuarios.}
+    \end{cvitems}
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Fork de Vim. Editor con capacidades de IDE altamente configurable (Lua)} % Job title
+    {Neovim} % Organization
+    {} % Location
+    {} % Date(s)
+    {
+    \begin{cvitems} % Description(s) of tasks/responsibilities
+      %\item {\href{https://github.com/nvimdev/dashboard-nvim/pulls?q=involves%3Apolirritmico+}{https://github.com/nvimdev/dashboard-nvim/pulls?q\=involves\%3Apolirritmico\+}:\\ Lista con interacciones en proyectos (PR, merges, issues, etc.).}
+      \item {\textbf{\href{https://github.com/polirritmico/telescope-lazy-plugins.nvim}{polirritmico/telescope-lazy-plugins.nvim}}\\ Este plugin hace un parsing sobre la configuración del usuario, sigue importaciones de módulos y lo integra en un fuzzy finder.}
+      \item {\textbf{\href{https://github.com/polirritmico/monokai-nightasty.nvim}{polirritmico/monokai-nightasty.nvim}}\\ Una implementación del tema Monokai en lua para neovim. Proporciona utilidades como conmutador de temas light/dark y utiliza un sistema de caché sencillo para optimizar los tiempos de carga. Para validar la caché comprueba la configuración del usuario, último commit hash y compara algunos objetos serializados.}
+      \item {\textbf{\href{https://github.com/polirritmico/simple-boolean-toggle.nvim}{polirritmico/simple-boolean-toggle.nvim}}\\ Conmutador booleano customizable}
+      \item
+          {\textbf{\href{https://github.com/polirritmico/manual-tag-closer.nvim}{polirritmico/manual-tag-closer.nvim}}\\
+            A través de tressiter (syntax node parser) generar cierres de tags,
+            como ``end", ``done", ``\}", ``fi", ``\</tag>", etc.}
+      \item {\textbf{\href{https://polirritmico.github.io/}{polirritmico.github.io}}\\ Blog en Ruby, Jekyll}
+      \item {\textbf{\href{https://www.reddit.com/user/ebray187/}{reddit.com/user/ebray187}}\\ Documentación y soporte a usuarios.}
+    \end{cvitems}
+    }
+
+\end{cventries}
+
